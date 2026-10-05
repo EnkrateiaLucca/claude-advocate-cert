@@ -1,0 +1,17 @@
+customer_name,account_number,email,region,plan,signup_date,monthly_spend_usd,support_tickets_90d,nps,churned
+Maria Okafor,AC-40021,maria.okafor@example.com,EMEA,Pro,2025-02-11,420,1,9,no
+James Whitfield,AC-40022,j.whitfield@example.com,NA,Basic,2025-03-02,89,4,5,yes
+Priya Raman,AC-40023,priya.r@example.com,APAC,Enterprise,2024-11-19,2310,0,10,no
+Tomás Herrera,AC-40024,tomas.h@example.com,LATAM,Pro,2025-01-07,390,3,6,no
+Chen Wei,AC-40025,chen.wei@example.com,APAC,Basic,2025-05-23,79,6,3,yes
+Sophie Laurent,AC-40026,s.laurent@example.com,EMEA,Enterprise,2024-08-30,2890,2,8,no
+Daniel Kim,AC-40027,daniel.kim@example.com,NA,Pro,2025-04-14,410,5,4,yes
+Aisha Bello,AC-40028,aisha.b@example.com,EMEA,Basic,2025-06-01,95,1,7,no
+Lucas Moreau,AC-40029,l.moreau@example.com,EMEA,Pro,2024-12-12,445,0,9,no
+Hannah Schulz,AC-40030,h.schulz@example.com,EMEA,Basic,2025-02-28,85,7,2,yes
+Rafael Costa,AC-40031,rafael.c@example.com,LATAM,Enterprise,2024-10-05,1990,1,8,no
+Emily Carter,AC-40032,emily.c@example.com,NA,Basic,2025-07-09,79,3,6,no
+Kenji Sato,AC-40033,kenji.s@example.com,APAC,Pro,2025-03-21,399,2,7,no
+Grace Mensah,AC-40034,grace.m@example.com,EMEA,Pro,2025-01-30,430,5,4,yes
+Oliver Brown,AC-40035,oliver.b@example.com,NA,Enterprise,2024-09-14,3120,0,10,no
+Lena Novak,AC-40036,lena.n@example.com,EMEA,Basic,2025-05-05,82,8,1,yes

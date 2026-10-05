@@ -1,0 +1,17 @@
+customer_id,region,plan,signup_month,monthly_spend_usd,support_tickets_90d,nps,churned
+C001,EMEA,Pro,2025-02,420,1,9,no
+C002,NA,Basic,2025-03,89,4,5,yes
+C003,APAC,Enterprise,2024-11,2310,0,10,no
+C004,LATAM,Pro,2025-01,390,3,6,no
+C005,APAC,Basic,2025-05,79,6,3,yes
+C006,EMEA,Enterprise,2024-08,2890,2,8,no
+C007,NA,Pro,2025-04,410,5,4,yes
+C008,EMEA,Basic,2025-06,95,1,7,no
+C009,EMEA,Pro,2024-12,445,0,9,no
+C010,EMEA,Basic,2025-02,85,7,2,yes
+C011,LATAM,Enterprise,2024-10,1990,1,8,no
+C012,NA,Basic,2025-07,79,3,6,no
+C013,APAC,Pro,2025-03,399,2,7,no
+C014,EMEA,Pro,2025-01,430,5,4,yes
+C015,NA,Enterprise,2024-09,3120,0,10,no
+C016,EMEA,Basic,2025-05,82,8,1,yes
