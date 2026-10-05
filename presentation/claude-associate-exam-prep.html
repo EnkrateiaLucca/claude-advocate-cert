@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Claude Associate Exam Prep · Live Deck</title>
+  <!--
+    Live presenter deck for "Claude Certified Associate Exam Prep: A Two-Hour Crash Course".
+    Press P for presenter notes, C to clone the window for a second screen.
+    Visual style shared with context-engineering-hands-on.html.
+  -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    body { font-family: 'Inter', -apple-system, sans-serif; }
+
+    .remark-slide-content {
+      background: #f5f0e6;
+      color: #1a1a1a;
+      padding: 1.2em 2em;
+      font-size: 26px;
+      line-height: 1.4;
+    }
+    .remark-slide-content h1 { font-size: 1.7em; font-weight: 800; margin: 0.2em 0 0.4em; }
+    .remark-slide-content h2 { font-size: 1.25em; font-weight: 600; margin: 0.2em 0; color: #444; }
+    .remark-slide-content strong { font-weight: 700; }
+    .remark-slide-content em { color: #555; }
+    .remark-slide-content code, .remark-slide-content tt {
+      font-family: 'JetBrains Mono', monospace;
+      background: #ebe4d4;
+      padding: 0.05em 0.3em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    .remark-slide-content blockquote {
+      border-left: 4px solid #d9a441;
+      padding: 0.4em 1em;
+      margin: 0.6em 0;
+      background: #fbf6e8;
+      font-style: italic;
+      color: #2a2a2a;
+    }
+
+    /* Tables: white field, dark header, ruled rows */
+    .remark-slide-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.6em;
+      font-size: 0.78em;
+      background: #fff;
+      border: 2px solid #1a1a1a;
+    }
+    .remark-slide-content th, .remark-slide-content td {
+      text-align: left;
+      vertical-align: top;
+      padding: 0.5em 0.7em;
+      border-bottom: 1px solid #ddd5c0;
+    }
+    .remark-slide-content thead th {
+      background: #1a1a1a;
+      color: #f5f0e6;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.85em;
+    }
+    .remark-slide-content tbody tr:last-child td { border-bottom: none; }
+    .remark-slide-content tbody tr:nth-child(even) td { background: #faf7ee; }
+    .remark-slide-content tbody td:first-child { font-weight: 700; color: #b85c1f; }
+    /* Dense tables (7+ rows) step down one size */
+    .dense table { font-size: 0.68em; }
+    .dense th, .dense td { padding: 0.35em 0.6em; }
+
+    /* TITLE slides: dark, four-color top bar */
+    .title {
+      background: #1c1c1c;
+      color: #f5f0e6;
+      padding: 4em 2.5em 2em;
+      border-top: 12px solid;
+      border-image: linear-gradient(to right, #e26b5a 0%, #e26b5a 25%, #e7c548 25%, #e7c548 50%, #7eb069 50%, #7eb069 75%, #66a3d2 75%, #66a3d2 100%) 1;
+    }
+    .title h1 { font-size: 2.4em; line-height: 1.05; margin-bottom: 0.2em; color: #f5f0e6; }
+    .title h2 { color: #c9c4b5; font-weight: 400; font-size: 1.05em; }
+    .title a { color: #66a3d2; }
+    .title .session-label {
+      color: #e7c548; font-size: 0.75em; letter-spacing: 0.2em;
+      font-weight: 700; margin-bottom: 1em;
+    }
+    .title .footer {
+      position: absolute; bottom: 1.5em; left: 2.5em;
+      color: #e7c548; font-size: 0.6em; font-weight: 600;
+    }
+    .title .footer span { color: #888; font-weight: 400; display: block; margin-top: 0.2em; }
+
+    /* SECTION DIVIDER: title slide + domain chips + clock */
+    .divider { padding-top: 3em; }
+    .divider h1 { font-size: 2.1em; }
+    .divider .chips { display: block; margin-top: 1.2em; }
+    .divider .chip {
+      display: inline-block; border: 2px solid #e7c548; color: #f5f0e6;
+      padding: 0.3em 0.75em; margin: 0 0.5em 0.5em 0;
+      font-size: 0.75em; font-weight: 600;
+    }
+    .divider .chip strong { color: #e7c548; }
+
+    /* EYEBROW label above slide headline */
+    .eyebrow-label {
+      color: #b85c1f; font-size: 0.6em; letter-spacing: 0.15em;
+      font-weight: 700; text-transform: uppercase; margin-bottom: 0.2em;
+    }
+
+    /* SINGLE-STAT hero */
+    .stat { text-align: center; padding-top: 1.5em; }
+    .stat .hero { font-size: 5.5em; font-weight: 800; color: #b85c1f; line-height: 1; margin: 0.2em 0; }
+    .stat .caption { font-size: 0.95em; color: #444; margin-top: 0.4em; }
+
+    /* PULL QUOTE slide */
+    .quote-slide { padding-top: 2em; text-align: center; }
+    .quote-slide .quote-body { font-size: 1.5em; font-style: italic; color: #1a1a1a; max-width: 22em; margin: 0.5em auto; line-height: 1.35; }
+    .quote-slide .attrib { font-size: 0.75em; color: #777; margin-top: 1em; font-style: normal; letter-spacing: 0.05em; }
+
+    /* TWO-COLUMN compare */
+    .two-col { display: flex; gap: 1.5em; margin-top: 0.6em; }
+    .two-col > div { flex: 1; padding: 1em; border: 2px solid #1a1a1a; background: #fff; font-size: 0.85em; }
+    .two-col .col-head { font-weight: 700; color: #b85c1f; margin-bottom: 0.4em; letter-spacing: 0.05em; }
+    .two-col .col-head.green { color: #4d8a3a; }
+    .two-col .col-head.blue  { color: #4078a8; }
+    .two-col .col-head.amber { color: #c89020; }
+    .two-col ul { margin: 0.2em 0; padding-left: 1.1em; }
+    .two-col li { margin-bottom: 0.25em; }
+
+    /* CARD grids */
+    .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0.8em; margin-top: 0.5em; }
+    .grid-4 .card { background: #fff; border: 2px solid #1a1a1a; padding: 0.8em 0.55em; font-size: 0.85em; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8em; margin-top: 0.5em; }
+    .grid-3 .card { background: #fff; border: 2px solid #1a1a1a; padding: 0.8em; font-size: 0.9em; }
+    .grid-3 .tag, .grid-4 .tag { font-weight: 700; letter-spacing: 0.08em; display: block; margin-bottom: 0.3em; }
+    .grid-3 .tag { font-size: 1.05em; }
+    .grid-4 .tag { font-size: 1.05em; letter-spacing: 0.03em; white-space: nowrap; }
+    .grid-3 .w-tag, .grid-4 .w-tag { color: #b85c1f; }
+    .grid-3 .s-tag, .grid-4 .s-tag { color: #c89020; }
+    .grid-3 .c-tag, .grid-4 .c-tag { color: #4d8a3a; }
+    .grid-3 .i-tag, .grid-4 .i-tag { color: #4078a8; }
+    .card .maps { display: block; margin-top: 0.5em; font-size: 0.85em; font-weight: 700; color: #777; letter-spacing: 0.05em; }
+
+    /* Numbered list / takeaways */
+    .takeaways ol { list-style: none; padding-left: 0; margin-top: 0.5em; }
+    .takeaways li { display: flex; align-items: flex-start; margin-bottom: 0.55em; }
+    .takeaways li .num {
+      display: inline-block; width: 1.7em; height: 1.7em; line-height: 1.7em;
+      background: #1a1a1a; color: #f5f0e6; text-align: center;
+      font-weight: 700; margin-right: 0.8em; flex-shrink: 0;
+    }
+    .takeaways li .body strong { display: block; font-size: 1em; }
+    .takeaways li .body span { color: #555; font-size: 0.8em; display: block; margin-top: 0.1em; }
+
+    /* Verbatim objectives list */
+    .objectives ul { padding-left: 1.1em; }
+    .objectives li { margin-bottom: 0.45em; font-size: 0.92em; }
+    .source-line { display: block; color: #777; font-size: 0.6em; margin-top: 1em; font-style: italic; }
+
+    /* LIVE DEMO slides: blue field, banner with a red "recording" dot */
+    .demo {
+      background: #e9f0f6;
+      border-left: 16px solid #4078a8;
+    }
+    .demo-banner {
+      display: block; background: #4078a8; color: #fff;
+      font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase;
+      font-size: 0.62em; padding: 0.4em 0.9em; margin-bottom: 0.4em;
+    }
+    .demo-banner::before {
+      content: ''; display: inline-block; width: 0.75em; height: 0.75em;
+      border-radius: 50%; background: #e26b5a; margin-right: 0.7em;
+      vertical-align: -0.05em; box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+    }
+    .demo h1 { font-size: 1.4em; margin: 0.1em 0 0.3em; }
+    .demo ul { margin: 0.2em 0 0.4em; padding-left: 1em; font-size: 0.76em; }
+    .demo li { margin-bottom: 0.2em; }
+    .demo li strong { color: #4078a8; }
+
+    /* Prompt blocks (fenced code) */
+    .remark-slide-content pre { margin: 0.4em 0; }
+    .remark-slide-content pre code, .remark-slide-content .remark-code {
+      display: block; background: #1c1c1c; color: #f5f0e6;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6em; line-height: 1.45; padding: 0.7em 1em;
+      white-space: pre-wrap; border-radius: 4px;
+    }
+    .remark-code-line { white-space: pre-wrap; }
+
+    /* EXAM-STYLE QUESTION slides */
+    .question { background: #fff8ea; }
+    .answer { background: #f2f7ef; }
+    .q-label {
+      display: block; color: #b85c1f; font-size: 0.6em; letter-spacing: 0.15em;
+      font-weight: 700; text-transform: uppercase; margin-bottom: 0.5em;
+      border-bottom: 2px solid #b85c1f; padding-bottom: 0.3em;
+    }
+    .answer .q-label { color: #4d8a3a; border-color: #4d8a3a; }
+    .stem { display: block; font-size: 0.88em; line-height: 1.4; }
+    .options ul { list-style: none; padding-left: 0; margin-top: 0.6em; }
+    .options li {
+      background: #fff; border: 2px solid #1a1a1a; padding: 0.28em 0.7em;
+      margin-bottom: 0.35em; font-size: 0.78em;
+    }
+    .correct {
+      display: block; background: #4d8a3a; color: #fff;
+      padding: 0.45em 0.9em; font-weight: 700; font-size: 0.9em;
+    }
+    .answer table { font-size: 0.7em; }
+
+    /* Q&A / break cue */
+    .cue { text-align: center; }
+    .cue h1 { font-size: 2.6em; }
+    .cue .eyebrow-label { font-size: 0.8em; }
+  </style>
+</head>
+<body>
+  <textarea id="source">
+
+class: title
+
+.session-label[O'REILLY LIVE TRAINING · 2 HOURS]
+
+# Claude Certified Associate Exam Prep
+
+## A two-hour crash course for the CCAO-F exam: the blueprint, the judgment patterns, and live practice in claude.ai.
+
+.footer[Claude Certified Associate – Foundations (CCAO-F)<span>O'Reilly Live Training · Lucas Soares</span>]
+
+???
+Welcome. Two hours, five segments, nine live demos, eleven exam-style questions.
+
+Goal for today: by the end, every attendee can read a CCAO-F item, find the constraint in the stem, name the distractor pattern behind each wrong option, and pick the proportionate answer.
+
+Ask people to open claude.ai in a second window and download the repo so they have `assets/demo-files/` ready. Pro or higher is best because Segment 3 builds a Project.
+
+All demo files are fictional. All practice questions are original. The three official samples come from the public exam guide.
+
+---
+
+# Today's plan
+
+| Segment | Clock | Domains | Weight |
+|---|---|---|---|
+| 1 · The exam, the platform, and model selection | 0:00–0:25 | Blueprint + D3 | 12% |
+| 2 · Prompting and output validation | 0:25–1:00 | D1 + D2 | 35% |
+| 3 · Workflows, Projects, and knowledge | 1:00–1:30 | D4 + D5 | 28% |
+| 4 · Governance, troubleshooting, strategy | 1:30–1:50 | D6 + D7 | 25% |
+| 5 · Your four-week study plan | 1:50–2:00 | All | · |
+
+*Keep claude.ai and the repo's `assets/demo-files/` folder open.*
+
+???
+Walk the table quickly. Point out that time follows weight: Segment 2 gets the most time because D1 + D2 are 35% of the exam.
+
+Break sits at the end of Segment 2, around the one-hour mark.
+
+The repo has one lesson file per domain with every demo prompt ready to copy. The slides show a short version of each prompt.
+
+---
+
+class: title, divider
+
+.session-label[SEGMENT 1 · 0:00 → 0:25 · 25 MIN]
+
+# The exam, the platform, and model selection
+
+.chips[
+.chip[Exam blueprint · all 7 domains]
+.chip[D3 Product and Model Selection · **12%**]
+]
+
+.footer[Lessons 00 + 01<span>Demos: official samples · A feature picker · B context drift</span>]
+
+???
+Budget: ~8 min on the exam itself, ~5 min walking the official samples, ~10 min on D3 with two short demos, 2 min Q&A.
+
+---
+
+# Four credentials, one program
+
+| Credential | Fee | Built for |
+|---|---|---|
+| **Associate – Foundations** (today) | $99 | Ops, marketing, PM, education, comms pros who use Claude daily |
+| Developer – Foundations | $125 | Engineers building with the API, Claude Code, MCP |
+| Architect – Foundations | $125 | Partners designing Claude solutions end to end |
+| Architect – Professional | $175 | Advanced architecture expertise |
+
+**Registration currently requires a Claude Partner Network company email.** The skills apply to everyone.
+
+???
+Associates escalate complex or technical work to Developers and Architects. The exam tests that you know where your lane ends.
+
+Eligibility: the Partner Academy FAQ says registration needs a partner email on a recognized company domain. Personal email addresses do not work. If you are not at a partner org, today still covers the skills; check https://anthropic-partners.skilljar.com/page/faq-certifications for changes.
+
+The Associate credential does not count toward Partner Network tier eligibility. The other three do.
+
+Discounts follow the partner tier (Select, Preferred, Global Premier get 50% off). Mention only if asked.
+
+---
+
+# The exam at a glance
+
+| Item | Detail |
+|---|---|
+| Format | 60 items · multiple-choice + multiple-response ("select N") |
+| Time | 120 min · about 2 min per item |
+| Pass | Scaled 720 on 100–1,000 · **720 ≠ 72% raw** |
+| Delivery | $99 · Pearson VUE, online or test center |
+| Rules | Closed book · English only · NDA before you start |
+| Validity | 12 months · free on-time renewal |
+
+???
+Scoring is criterion-referenced: you are measured against a fixed standard. Other candidates' scores play no part. The cut score came from a standard-setting study with subject-matter experts.
+
+The score report shows percent-correct per domain. Those percentages do not decide pass or fail. Only the total scaled score does.
+
+Anthropic does not publish the raw-to-scaled conversion. Do not plan around "I need 43 right."
+
+Seat time is about 135 minutes with check-in and a short survey. You see your result on screen at the end. Passing candidates get a Credly badge.
+
+Each item states how many responses to select. Treat every multiple-response item as all-or-nothing. No source confirms partial credit.
+
+---
+
+.eyebrow-label[Who the exam is written for]
+
+# The minimally qualified candidate
+
+> "moves beyond basic question-and-answer usage to process reimagination, task automation, and project development."
+
+- Uses Claude daily at work. No coding required.
+- Knows Projects, Artifacts, and workflow features.
+- Aligns usage with business needs, risk, and policy.
+- **Escalates** technical builds to Developers or Architects and high-stakes calls to qualified humans.
+
+???
+Quote is from Section 4 of the exam guide.
+
+The MQC sits between casual prompt users and technical AI practitioners. Items are written for this person. When two options look right, ask: what would a careful professional with this profile do?
+
+Out of scope per Section 3: API development, agentic system design, enterprise-scale architecture and integrations. If an option has the Associate building an integration, it is usually wrong. If an option escalates a simple writing task to IT, it is also wrong.
+
+---
+
+class: dense
+
+# The blueprint: seven weighted domains
+
+| # | Domain | Weight | ≈ Items |
+|---|---|---|---|
+| D1 | Prompting and Task Execution | 14% | 8 |
+| **D2** | **Output Evaluation and Validation** | **21%** | **13** |
+| D3 | Product and Model Selection | 12% | 7 |
+| D4 | Workflow Integration and Solution Design | 16% | 10 |
+| D5 | Configuration and Knowledge Management | 12% | 7 |
+| D6 | Governance, Risk, and Responsible Use | 15% | 9 |
+| D7 | Troubleshooting and Optimization | 10% | 6 |
+
+**D2 + D4 + D6 = 52% of the exam.** Study time should follow the weights.
+
+???
+Item counts are my rounding of weight × 60. The guide publishes weights only, and they are approximate.
+
+D2 alone is about one item in five. Validation habits are the single highest-yield thing to practice.
+
+The 30 objectives under these seven domains are verbatim in the guide. Each domain section today opens with its objectives slide.
+
+---
+
+# How items are written
+
+A short workplace scenario, a constraint, and a "most appropriate" action. **The right answer is the proportionate step that lets work continue safely.**
+
+| Distractor pattern | Sounds like |
+|---|---|
+| Blind trust | "Send it. Claude sounded confident." |
+| Fake safeguard | "Tell Claude not to retain the data." |
+| Irrelevant fix | "Reword it to sound more formal." |
+| Over-reaction | "Skip the analysis entirely." |
+| Over-engineering | "Top model for everything." "Escalate it all." |
+
+???
+These five labels come straight from the wrong options in the three official samples. Learn them. When you can name the pattern behind a wrong option, you eliminate it in seconds.
+
+The constraint in the stem decides the answer: "compliance team", "high volume", "policy restricts", "every week". Find it before you read the options.
+
+Core exam logic to repeat all session:
+1. Verify specifics against the source. Model confidence is not evidence.
+2. Match the model and feature to the task.
+3. Anonymize before upload.
+4. Put recurring context in a Project.
+5. Diagnose what changed before rewriting.
+6. Escalate technical work to Developers/Architects and high-stakes judgment to qualified humans.
+
+---
+
+# A second lens: the AI Fluency 4Ds
+
+.grid-4[
+.card[
+.tag.w-tag[DELEGATION]
+What to hand off, and to which tool.
+.maps[→ D3 · D4]
+]
+.card[
+.tag.s-tag[DESCRIPTION]
+How you ask and how you configure.
+.maps[→ D1 · D5]
+]
+.card[
+.tag.c-tag[DISCERNMENT]
+Judging what comes back.
+.maps[→ D2 · D7]
+]
+.card[
+.tag.i-tag[DILIGENCE]
+Owning the result, safely.
+.maps[→ D6 · D2]
+]
+]
+
+*From Anthropic's free AI Fluency course. Use it to name what an item tests.*
+
+???
+AI Fluency: Framework and Foundations is a recommended prerequisite on the official prep path. https://academy.claude.com/courses/ai-fluency-framework-foundations
+
+Academy definitions: Delegation is "Deciding what work to do with AI vs. yourself." Description is "Communicating effectively with AI systems." Discernment is "Evaluating AI outputs critically." Diligence is "Ensuring responsible AI collaboration."
+
+Practical use on exam day: a Discernment item wants verification. A Diligence item wants a real control or a disclosure. A Delegation item wants a split of work between people and Claude.
+
+---
+
+class: question
+
+.q-label[Official sample 1 · D2 Output Evaluation · exam guide, Section 8]
+
+.stem[An associate asks Claude to summarize a new regulation, and Claude produces a confident summary citing a specific subsection number. Before sending the summary to the compliance team, what is the most appropriate action?]
+
+.options[
+- **A.** Send it as-is, since Claude expressed high confidence.
+- **B.** Verify the cited subsection against the official regulation text before sharing.
+- **C.** Ask Claude to rate its own confidence and send it if the rating is high.
+- **D.** Reword the summary to sound more formal, then send it.
+]
+
+???
+DEMO (Lesson 00, "Demo: walk the three official samples"). Read the stem aloud. Ask the room to type their letter in chat before you reveal.
+
+Deciding phrases: "citing a specific subsection" and "compliance team". Specific details are where fabrication concentrates, and the audience raises the stakes.
+
+---
+
+class: answer
+
+.q-label[Official sample 1 · Answer]
+
+.correct[B · Verify the cited subsection against the official regulation text]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Blind trust | Confidence is not evidence |
+| C | Fake safeguard | Self-rated confidence is not a reliable accuracy signal |
+| D | Irrelevant fix | Formatting does not change correctness |
+
+*Names, dates, numbers, citations, and quotes are where fabrication hides.*
+
+???
+Guide rationale, verbatim: "Language models can fabricate specific-looking details such as citation numbers, a hallucination. Validating factual claims, especially citations bound for a compliance audience, against an authoritative source is the diligence step required. Self-reported confidence (A, C) is not a reliable accuracy signal, and reformatting (D) does not address correctness."
+
+We do this exact scenario hands-on in Segment 2, Demo D.
+
+---
+
+class: question
+
+.q-label[Official sample 2 · D3 Product and Model Selection · exam guide, Section 8]
+
+.stem[An associate needs to generate a high volume of short customer-reply drafts where speed and cost matter more than deep reasoning. Which choice best fits the task?]
+
+.options[
+- **A.** Use the most capable, highest-cost model for every reply to maximize quality.
+- **B.** Use a faster, lower-cost model suited to straightforward, high-volume tasks.
+- **C.** Disable all product features to reduce cost.
+- **D.** Switch to a different AI platform.
+]
+
+???
+Deciding phrase: "speed and cost matter more than deep reasoning". The stem tells you the trade-off. Your job is to honor it.
+
+---
+
+class: answer
+
+.q-label[Official sample 2 · Answer]
+
+.correct[B · A faster, lower-cost model for straightforward, high-volume work]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Over-engineering | Wastes the cost and latency budget |
+| C | Irrelevant fix | Features are not the cost driver here |
+| D | Irrelevant fix | A new platform does not address the trade-off |
+
+*Match the tier to the task. Save the top tier for complex reasoning.*
+
+???
+Guide rationale: "Aligning model selection with task requirements means matching a faster, lower-cost model to straightforward, high-volume work, reserving the most capable model for complex reasoning."
+
+In tier names: this is Haiku territory. The guide never says "always use X". It says match.
+
+---
+
+class: question
+
+.q-label[Official sample 3 · D6 Governance · exam guide, Section 8]
+
+.stem[A project manager wants to upload a spreadsheet containing customer names and account numbers so Claude can analyze trends. Organizational policy restricts sharing regulated personal data. What is the most appropriate action?]
+
+.options[
+- **A.** Upload the file as-is, since the analysis is internal.
+- **B.** Remove or anonymize the personal identifiers before uploading, consistent with policy.
+- **C.** Upload the file but instruct Claude not to retain it.
+- **D.** Skip the analysis entirely.
+]
+
+???
+Deciding phrase: "policy restricts sharing regulated personal data". The policy sets the boundary. The analysis is still worth doing.
+
+---
+
+class: answer
+
+.q-label[Official sample 3 · Answer]
+
+.correct[B · Remove or anonymize identifiers before uploading]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Blind trust | "Internal" does not override policy |
+| C | Fake safeguard | An instruction to Claude is not a policy control |
+| D | Over-reaction | Anonymization lets the work continue |
+
+*All three samples reward one move: keep the work going and add the one real control.*
+
+???
+Guide rationale: "instructing the model not to retain data (C) does not satisfy the policy control; abandoning the task (D) is unnecessary when anonymization enables it."
+
+Demo G in Segment 4 runs this exact scenario with a fictional customer CSV.
+
+Optional homework from Lesson 00: ask Claude to write three new scenarios with one distractor per pattern and grade your labels.
+
+---
+
+.eyebrow-label[D3 · Product and Model Selection · 12%]
+
+# What the exam asks
+
+.objectives[
+- Select appropriate Claude product features (Projects, research mode, chat, artifacts)
+- Differentiate between Claude model types (Haiku, Sonnet, Opus)
+- Align model selection with task requirements (cost, speed, quality)
+- Understand and manage context limitations and memory considerations (when to restart, summarize, or persist)
+]
+
+.source-line[Verbatim objectives · Exam Guide v1.0, Section 6]
+
+???
+Three decisions set the quality ceiling before you write a prompt: the entry point and features, the model tier, and the context. The official prep course "Claude Platform & Model Foundations" adds a fourth: capability features like web search and Research.
+
+---
+
+class: dense
+
+# Feature picker
+
+| You need… | Use | Skip |
+|---|---|---|
+| A quick current fact | Web search | Research |
+| A cited, multi-source report | Research (web search on) | Plain chat |
+| Recurring context for one workstream | Project | Re-uploading every chat |
+| A deliverable to edit and share | Artifact | A long inline reply |
+| A .docx, .xlsx, .pptx, or .pdf | File creation | Copy-paste |
+| Multi-step hand-off, a folder, a schedule | Cowork | Chat |
+| Thinking out loud, turn by turn | Chat | Cowork |
+| A system integration or code | Escalate to Developers | DIY |
+
+???
+Research is agentic: many searches, minutes long, cited report. It needs web search enabled. For one fact, web search is faster.
+
+Chat vs Cowork: Chat when you are still working it out and present every turn. Cowork when the deliverable is clear and you describe it once and check back. Cowork saves into a working folder and runs scheduled tasks.
+
+Artifacts: Claude creates one when you ask for something that stands on its own. "Summarize our Q3 results" gets a chat reply. "Turn our Q3 results into a one-page doc for leadership" gets an artifact.
+
+Claude Code exists for software work. For the Associate exam, code and integrations are the escalation signal.
+
+Features combine: a recurring current-information workflow can use a Project, Research, and an Artifact together.
+
+---
+
+class: demo
+
+.demo-banner[Live demo A · Feature picker · ~3 min]
+
+# Pick the feature, then compare two tiers
+
+- **Lesson:** `lessons/01-platform-and-model-selection.md` → Demo A
+- **Upload:** `assets/demo-files/meeting-notes-raw.md` (Part 2)
+- **Do:** vote on the 8 scenarios in the lesson, then run the same prompt on Haiku and Sonnet
+- **Watch for:** which item each model flags. Strong answers flag the ticket CSV with customer emails.
+
+```
+Summarize the attached meeting notes in five bullet points. Then flag the one item you would most want a human to check before anyone acts on it, and explain why in one sentence.
+```
+
+???
+Part 1 answers: 1 web search, 2 Research, 3 Project, 4 Artifact, 5 Cowork scheduled task, 6 file creation, 7 chat, 8 escalate to a Developer or Architect.
+
+Part 2: two new chats, one per model. Compare substance, ignore length. For a short summary the faster tier often holds quality. That is the Sample 2 logic. When the task needs judgment about risk, compare the tiers on that part.
+
+Debrief line: choose the smallest model that holds quality on the task you actually run.
+
+---
+
+# Model picker: tier and effort
+
+| Tier | Trade-off | Pick it for |
+|---|---|---|
+| Haiku | Fastest, lowest cost | High-volume, simple: reply drafts, extraction, short summaries |
+| Sonnet | Balanced everyday default | Writing, analysis, multi-step work |
+| Opus | Deepest reasoning, highest cost | Complex analysis where Sonnet struggled |
+
+**Effort and extended thinking form a second lever.** Raise them for hard reasoning. Lower them for routine work.
+
+???
+The exam guide names three tiers. Teach tiers and trade-offs. Version numbers change; the exam does not test them.
+
+One note for accuracy: Anthropic's current lineup also includes Fable, a newer tier above Opus for the largest, longest tasks. The exam guide names three, so answer exam items in Haiku / Sonnet / Opus terms.
+
+Effort controls how thoroughly Claude works before answering. Changing the model changes capability and cost. Changing effort changes cost while keeping the model's capabilities. A frontier model at medium effort often beats an older model at maximum effort.
+
+Cost per task beats cost per token: a stronger model can cost less per task if it needs fewer follow-ups.
+
+Signs of too little effort: missed instructions, unfinished work. Too much: verbosity, scope creep, talking itself out of a correct answer.
+
+Traps: "always use the best model" (Sample 2 A). "Smallest model for hard work." "A bigger model fixes a format, grounding, or policy problem."
+
+---
+
+class: dense
+
+# Context: restart, summarize, or persist
+
+Every turn re-sends the whole conversation. Long chats cost more and lose focus.
+
+| Situation | Move |
+|---|---|
+| Chat drifted, early rules ignored | **Restart** with a short handoff summary |
+| Same task, near the context limit | **Summarize** (auto-compaction loses some detail) |
+| New, unrelated task | **Restart** in a fresh chat |
+| Facts needed in every chat | **Persist** in Project instructions, knowledge, or memory |
+| Sensitive one-off | **Incognito** (org retention still applies) |
+
+???
+Context window: 200K+ tokens, up to 1M on paid plans with supported models. Quality drops before the window fills. Important content buried in the middle of a long input gets less attention, so put key instructions at the start or end.
+
+Usage limits (how much you use over time) differ from length limits (how much fits in one conversation).
+
+Claude does not learn from your corrections. It responds to what is in context. A correction persists only through instructions, knowledge, memory, or a skill.
+
+Memory: on by default for Free/Pro/Max; on Team/Enterprise the owner controls it. Each Project has its own memory space. View and edit under Settings > Memory.
+
+Incognito chats are not saved to history or memory. They still follow org retention policies. Incognito does not make data approved for upload.
+
+---
+
+class: demo
+
+.demo-banner[Live demo B · Context drift · ~3 min]
+
+# Drift, summarize, start fresh
+
+- **Lesson:** `lessons/01-platform-and-model-selection.md` → Demo B
+- **Upload:** `assets/demo-files/meeting-notes-raw.md`
+- **Do:** set two format rules, take a long tangent, then ask for a handoff summary and open a new chat
+- **Watch for:** the summary drops detail. Check it before you rely on it.
+
+```
+Write a handoff summary I can paste into a new chat. Include: the goal, decisions made so far, open questions, and the two formatting rules I set at the start. Keep it under 150 words.
+```
+
+???
+Opening rule prompt (in the lesson): answer in at most 3 bullets and end with "Owner: name". Then the 400-word webinar brainstorm tangent, then "what should Raj do first?"
+
+In a short demo the rule may hold. In a 50-turn working chat, early rules weaken. The habit is the same either way.
+
+After the new chat follows both rules, ask the room: where do these rules belong if this were a weekly sync? Answer: Project instructions. That is restart, summarize, and persist in one exercise.
+
+---
+
+class: question
+
+.q-label[Original practice item · D3 · select 1]
+
+.stem[A marketing manager has spent 90 minutes in one chat refining a campaign brief. Claude now ignores the tone rules she set at the start and repeats ideas she already rejected. She writes a brief like this every month. What is the best next step?]
+
+.options[
+- **A.** Restate the tone rules in capital letters in the same chat.
+- **B.** Ask for a short summary of decisions, start a new chat with it, and save the tone rules in a Project's instructions.
+- **C.** Switch to the most capable model and keep going in the same chat.
+- **D.** Turn on Incognito so earlier turns stop influencing the output.
+]
+
+???
+Deciding phrases: "90 minutes in one chat", "ignores the tone rules set at the start", "every month".
+
+---
+
+class: answer
+
+.q-label[D3 practice item · Answer]
+
+.correct[B · Restart with a summary, persist the rules in a Project]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Irrelevant fix | Louder rules in a drifted chat do not fix drift |
+| C | Over-engineering | A bigger model does not shorten the context |
+| D | Fake safeguard | Incognito changes what gets saved. The drift stays. |
+
+*"Every month" is the cue for a Project.*
+
+???
+B covers all three D3 context moves: summarize the decisions, restart clean, persist the recurring rules.
+
+Cue words to remember: "every week / every month / same format" → Project.
+
+---
+
+class: center, middle, cue
+
+.eyebrow-label[0:23 → 0:25 · Segment 1 wrap]
+
+# Q&A
+
+Exam format · eligibility · features · model tiers
+
+???
+Two minutes. Park long logistics questions for Segment 5 (registration and rescheduling).
+
+---
+
+class: title, divider
+
+.session-label[SEGMENT 2 · 0:25 → 1:00 · 35 MIN]
+
+# Prompting and output validation
+
+.chips[
+.chip[D1 Prompting and Task Execution · **14%**]
+.chip[D2 Output Evaluation and Validation · **21%**]
+]
+
+.footer[35% of the exam · Lessons 02 + 03<span>Demos: C structured prompt · D spot the errors · break at the end</span>]
+
+???
+Budget: ~6 min D1 content, ~6 min Demo C, 2 min question, ~8 min D2 content, ~6 min Demo D, 2 min question, then Q&A and a 5-minute break.
+
+---
+
+.eyebrow-label[D1 · Prompting and Task Execution · 14%]
+
+# What the exam asks
+
+.objectives[
+- Create effective prompts for business and technical tasks
+- Apply task decomposition techniques to structure complex requests
+- Iterate prompts to improve output quality
+- Adapt prompting strategies based on task type (analysis, research, drafting, brainstorming)
+]
+
+.source-line[Verbatim objectives · Exam Guide v1.0, Section 6]
+
+???
+Mental model from Anthropic's docs: treat Claude as a brilliant new employee who lacks context on your norms. The golden rule: if a colleague with minimal context would be confused by your prompt, Claude will be too.
+
+---
+
+class: dense
+
+# Prompt anatomy
+
+| Part | Example (ops lead) |
+|---|---|
+| Role | "You are the chief of staff to the ops lead." |
+| Context | "Notes from our weekly sync. Budget is frozen until Nov 1." |
+| Task | "Extract every action item and open decision." |
+| Constraints | "Use only the notes. If an owner isn't named, write Unassigned." |
+| Format | "Table: Item, Owner, Due date, Status, Risk." |
+| Example | One filled row |
+
+Wrap long material in labeled tags like `<notes>` so instructions and inputs stay separate.
+
+???
+Claude 101 teaches a three-part version: set the stage, define the task, specify rules. Same idea.
+
+State the goal along with the format. "Convince my team this timeline is realistic" is a goal. "Three bullet points" is a format.
+
+Explain why a rule exists. Claude generalizes better from a reason than from a bare command.
+
+An example is the strongest signal for format. Concrete limits (word count, bullet count) beat adjectives ("be concise").
+
+Set the terms of the collaboration too: "Push back if my assumptions are wrong." "Tell me what you're uncertain about." Only about 30% of conversations do this, per Anthropic's AI Fluency Index.
+
+---
+
+# Decompose and chain
+
+.two-col[
+<div>
+<div class="col-head">ONE GIANT PROMPT</div>
+"Read these notes, find the actions, draft the email, and fix the problems."
+<span style="display:block;margin-top:0.6em">Errors in step 1 spread into everything after.</span>
+</div>
+<div>
+<div class="col-head green">A CHAIN WITH CHECKPOINTS</div>
+<strong>1.</strong> Extract actions → <em>you check</em><br>
+<strong>2.</strong> Draft the email from the checked table<br>
+<strong>3.</strong> Review the draft against stated criteria
+<span style="display:block;margin-top:0.6em">Each step yields something you can check.</span>
+</div>
+]
+
+**Checkpoint line:** "Stop after step 1 and wait for my review."
+
+???
+Decomposition is the tested answer for multi-part deliverables, long documents, or shallow output from one big prompt.
+
+Prompt chaining shines when you need to inspect intermediate outputs. The most common chain is self-correction: draft, review against criteria, refine.
+
+For 4–5 dependent steps, a checkpoint counters reasoning drift.
+
+Research mode decomposes on its own. That is part of why it is the right feature for a multi-source report.
+
+---
+
+# Iterate with specific feedback
+
+- **Name the change.** "Cut the first two paragraphs and end with the ask" beats "make it better."
+- **Restate the goal** when output follows your words and misses your point.
+- **Change one thing per round** so you know what worked.
+- **Restart clean** when the chat has drifted.
+- **Ask Claude to improve your prompt.** It can interview you.
+
+???
+Anthropic's AI Fluency Index: 85.7% of sampled conversations showed iteration. Iterating conversations showed about double the fluency behaviors and were far more likely to question Claude's reasoning.
+
+Trap: repeating an ignored instruction with more force. The course line: "Repeating the instruction with more force won't close the gap." Restate the goal.
+
+Trap: regenerate and hope. A retry with the same prompt does not address the cause.
+
+---
+
+# Strategy by task type
+
+| Task | What changes in the prompt |
+|---|---|
+| Analysis | Supply the sources, name the criteria, ask for reasoning before the conclusion |
+| Research | Use Research mode, set scope and constraints, require checkable sources |
+| Drafting | Audience, purpose, tone, length, format, and an example |
+| Brainstorming | Ask for volume first, then narrow with criteria |
+
+If you want a recommendation, ask for one. Otherwise you get a balanced discussion.
+
+???
+Analysis with no outside information needed: turn on extended thinking or raise effort.
+
+Research prompts: be specific about goals, specify the report sections, include constraints like budget, geography, timeline.
+
+Brainstorming works best in chat, turn by turn. The answer changes what you ask next.
+
+Delegated multi-step work (Cowork): name the deliverable, name the inputs, name the nuances.
+
+---
+
+class: demo
+
+.demo-banner[Live demo C · Structured prompt · ~6 min]
+
+# From raw notes to a decomposed prompt
+
+- **Lesson:** `lessons/02-prompting-and-task-execution.md` → Demo
+- **Upload:** `assets/demo-files/meeting-notes-raw.md`
+- **Do:** weak prompt first, then the tagged step-1 prompt, check, draft email, self-review
+- **Watch for:** "Unassigned" ticket summary, "No decision" on auto-send, legal check on the CSV
+
+```
+<role>You are the chief of staff to Dana, the operations lead.</role>
+<task>Step 1 only: extract every action item, request, and open decision. Then stop and wait for my review.</task>
+<format>Table: Item | Owner | Due date | Status | Risk or dependency. Use "Unassigned" and "Not stated" when the notes don't say.</format>
+```
+
+???
+Full prompt with context block and example row is in the lesson. Baseline weak prompt: "Summarize these notes and tell me what to do."
+
+At the checkpoint, verify yourself: the weekly ticket summary is Unassigned; Mei's auto-send question is No decision; dates are Oct 20, Nov 1, Thursday; IT review for AI tool spend shows as a dependency.
+
+Specific feedback example: "Row 4 has an owner the notes don't name. Change it to Unassigned."
+
+Step 2 drafts the email from the checked table only. Step 3 reviews it against four stated criteria. "Looks good" is not a review.
+
+Debrief: role, context, precise format, an example row, and a rule for missing information fixed the output. Decomposition put a human checkpoint between extraction and drafting. Each move maps to one D1 objective.
+
+---
+
+class: question
+
+.q-label[Original practice item · D1 · select 1]
+
+.stem[A comms lead asks Claude to "write an update about the office move." The draft is long and generic. She has ten minutes before it must go out. Which change most improves the next draft?]
+
+.options[
+- **A.** Add "be specific and concise" to the same prompt.
+- **B.** Regenerate three times and pick the best version.
+- **C.** State the audience (all staff, many remote), the goal (what changes for them on Monday), a 150-word limit, and paste the facilities FAQ as the source.
+- **D.** Switch to the most capable model.
+]
+
+???
+Deciding phrases: "long and generic" (missing context and limits) and "ten minutes" (no time for trial and error).
+
+---
+
+class: answer
+
+.q-label[D1 practice item · Answer]
+
+.correct[C · Audience, goal, a concrete limit, and the source]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Irrelevant fix | Adjectives add no audience, goal, or source |
+| B | Irrelevant fix | Regenerating repeats the same missing context |
+| D | Over-engineering | The prompt caused the generic draft. A new tier keeps the gaps. |
+
+*Generic output means missing context. Long output means a missing limit.*
+
+???
+The symptom-to-fix mapping here returns in D7: generic → add context; too long → give a word or bullet limit; wrong format → show an example.
+
+---
+
+.eyebrow-label[D2 · Output Evaluation and Validation · 21% · the largest domain]
+
+# What the exam asks
+
+.objectives[
+- Evaluate Claude-generated outputs for accuracy and completeness
+- Identify hallucinations, inconsistencies, and biases in responses
+- Apply fact-checking and validation techniques
+- Determine when human review or additional verification is required
+- Edit, adapt, refine, and compare outputs for the intended audience
+- Organize and curate information and select appropriate output formats (artifacts, inline, structured data)
+]
+
+???
+About 13 items. If your study time is short, spend it here. Anthropic's own research says discernment does not grow with tenure; it has to be practiced.
+
+Accuracy and completeness are separate checks. A summary can be 100% true and still leave out the one exception that matters.
+
+---
+
+class: dense
+
+# Where errors hide
+
+| Failure | Tell |
+|---|---|
+| Hallucination | Invented specifics: names, dates, statistics, citations, URLs, quotes |
+| Inconsistency | Two runs, or two sections, disagree |
+| Omission | Every sentence is true and a key exception is missing |
+| Distortion | "Up to" becomes "starting at" |
+| Bias | Default or stereotyped framing, one-sided claims |
+| Sycophancy | Claude agrees with your wrong premise |
+
+*The more precise a claim, the more it needs checking.*
+
+???
+Academy line: "Fabrication concentrates in specificity: names, dates, statistics, citations, URLs, quotes."
+
+Training leaves four fingerprints: a pull toward sycophancy, a default toward verbosity, occasional over-caution, and loose calibration between stated confidence and reliability.
+
+Inconsistency across runs signals a claim that is not grounded. Averaging two unverified numbers does not help. Agreement across runs is not proof either.
+
+Polished-output trap: in conversations that produced artifacts, users checked facts and questioned reasoning less often. A clean format earns the same checks as a rough draft.
+
+---
+
+# Fact-check techniques
+
+- **Check specifics** against the source of record.
+- **Quote first.** Ask for the exact supporting passage. No quote, no claim.
+- **Allow "not in the source."** Give Claude permission to say it doesn't know.
+- **Restrict sources** to the attached files when grounding matters.
+- **Read the source too.** Omissions only show up there.
+
+> "Self-reported confidence … is not a reliable accuracy signal." · Exam Guide, Sample 1
+
+???
+These come from Anthropic's "reduce hallucinations" guidance: allow "I don't know", use direct quotes for grounding, verify with citations and retract unsupported claims, restrict to provided documents.
+
+Signals that are not evidence: Claude's confidence, a self-check ("double-check your work"), agreement across reruns, a citation you haven't opened, a polished format.
+
+Verifying one claim does not validate the rest.
+
+Citations make verification easy. Opening the cited page is the verification.
+
+---
+
+class: dense
+
+# When a human must review
+
+| Trigger | Example | Who reviews |
+|---|---|---|
+| External audience | Customer reply, press release | You, plus the owner |
+| Legal, health, finance | Contract or policy summary | A qualified professional |
+| Decisions about people | Hiring, performance, promotion | The accountable manager |
+| Regulated workflow | Compliance filing | Qualified reviewer, with a record |
+| Low-stakes internal | Brainstorm, own notes | A quick skim |
+
+*Scale review depth to what rides on the output.*
+
+???
+Anthropic's Usage Policy lists high-risk use cases (legal, healthcare, insurance, finance, employment and housing, academic testing, media) that require a qualified human in the loop and disclosure.
+
+Academy wording: check the result in proportion to what's riding on it. A quick lookup needs a glance. Analysis that shapes a decision deserves a closer review.
+
+Trap: "add a human somewhere." Review only counts if the reviewer is qualified, sees the evidence, has authority, and acts before the consequential step.
+
+---
+
+class: demo
+
+.demo-banner[Live demo D · Spot the errors · ~6 min]
+
+# Spot the errors, then verify with quotes
+
+- **Lesson:** `lessons/03-output-evaluation-and-validation.md` → Demo
+- **Upload:** `fictional-regulation-excerpt.md` + `compliance-summary-draft.md`
+- **Do:** find errors yourself (3 min), run the quote-first check, push back once, then pick formats
+- **Watch for:** can you find each quote with Cmd+F? Does Claude hold firm on 24 months?
+
+```
+The regulation file is the source of record. Check the summary claim by claim: Supported, Contradicted, or Not in source, with the exact quote and section number. Then list what the summary leaves out. Use only the regulation file.
+```
+
+???
+Do not upload `claude-summary-with-errors.md`. It contains the instructor answer key.
+
+The six issues: (1) scope misread: 250+ employees, smaller orgs exempt from Sections 5–6; (2) 12 months instead of 24; (3) omissions: 90-day deletion window and legal-hold exemption; (4) fabricated Section 8.2; (5) "start at $50,000" distorts "up to"; (6) unsupported claim that small companies have weaker practices.
+
+Sycophancy probe: "I'm fairly sure 12 months is correct. My manager confirmed it." A good answer quotes 4.1 and holds.
+
+Format step: corrected one-pager as an artifact for compliance; then the same content as a Section | Requirement | Applies to | Deadline table for a tracker.
+
+Debrief: Claude's quotes made checking fast. The verification happened when you found them in the source. This is official Sample 1, hands-on.
+
+---
+
+class: dense
+
+# Output format picker
+
+| Output | Use when |
+|---|---|
+| Inline | A quick answer you read once |
+| Artifact | A deliverable to edit, reuse, or share by link |
+| File (.docx, .xlsx, .pptx, .pdf) | Someone needs a downloadable file |
+| Structured data (table, fixed fields) | The output feeds another step or tool |
+
+**Adapt for the audience.** Name the reader, their purpose, and the length they will actually read.
+
+???
+Ask for the deliverable along with the content. "Summarize our Q3 results" gets inline text. "Turn our Q3 results into a one-page doc for the leadership team" gets an artifact.
+
+Artifacts open and update in Claude and share by link. File creation produces downloadable Office files and PDFs.
+
+Organize and curate: keep declared gaps ("data unavailable") visible. A gap is a finding. Filling it invites fabrication.
+
+Audience drill from the Academy: explain one topic for a customer, a partner, and a new employee in one response, then compare.
+
+---
+
+# D1 + D2 traps
+
+.two-col[
+<div>
+<div class="col-head">PROMPTING (D1)</div>
+<ul>
+<li>Vague intensifiers: "be detailed", CAPITALS</li>
+<li>Regenerate and hope</li>
+<li>One giant prompt</li>
+<li>Repeat the ignored rule louder</li>
+</ul>
+</div>
+<div>
+<div class="col-head blue">VALIDATION (D2)</div>
+<ul>
+<li>Confident, cited, or fluent = correct</li>
+<li>Ask Claude to check itself</li>
+<li>Add a disclaimer and ship</li>
+<li>Polish it to fix accuracy</li>
+</ul>
+</div>
+]
+
+???
+Every one of these maps to a distractor pattern from Segment 1. Vague intensifiers and regenerating are irrelevant fixes. Self-checks and disclaimers are fake safeguards. "Confident means correct" is blind trust.
+
+A disclaimer does not make inaccurate content acceptable. A self-check is not independent of the thing being checked.
+
+---
+
+class: question
+
+.q-label[Original practice item · D2 · multiple response · select 2]
+
+.stem[Claude drafted a vendor comparison for a procurement director, who will use it to build a shortlist. It looks clean, cites "pricing page, accessed this week," and states that Vendor B holds a specific security certification. Which TWO steps are most appropriate before sending it?]
+
+.options[
+- **A.** Confirm the certification and prices on each vendor's official pages.
+- **B.** Ask Claude to confirm that it double-checked its facts.
+- **C.** Ask Claude to label which claims came from searched sources and which came from general knowledge.
+- **D.** Add a note that AI produced it, then send.
+- **E.** Convert it into an artifact so it looks more official.
+]
+
+???
+Multiple-response tactic: read "select 2" first, then judge each option as its own true/false.
+
+Deciding phrases: "procurement director", "shortlist" (a decision rides on it), "specific security certification" (a precise claim).
+
+---
+
+class: answer
+
+.q-label[D2 practice item · Answer]
+
+.correct[A + C · Verify the specifics and separate sourced claims from unsourced ones]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| B | Fake safeguard | A self-check is not independent |
+| D | Fake safeguard | Disclosure does not fix accuracy |
+| E | Irrelevant fix | Format does not change correctness |
+
+*C makes the check faster. A is the check.*
+
+???
+C comes from Anthropic's Discernment Toolkit: "If a claim comes from your general knowledge, label it 'unsourced'." It tells you where to look. Opening the vendor page is still the verification.
+
+Disclosure has its place (Segment 4). On its own it does not make content true.
+
+---
+
+class: center, middle, cue
+
+.eyebrow-label[0:52 → 1:00 · Segment 2 wrap]
+
+# Q&A + 5-minute break
+
+Back at 1:00 for workflows and Projects.
+
+???
+Three minutes of Q&A, then a five-minute break. During the break, ask attendees with Pro or higher to create an empty Project named "Northwind content" for Demo F.
+
+---
+
+class: title, divider
+
+.session-label[SEGMENT 3 · 1:00 → 1:30 · 30 MIN]
+
+# Workflows, Projects, and knowledge management
+
+.chips[
+.chip[D4 Workflow Integration and Solution Design · **16%**]
+.chip[D5 Configuration and Knowledge Management · **12%**]
+]
+
+.footer[28% of the exam · Lessons 04 + 05<span>Demos: E workflow map · F Northwind Project</span>]
+
+???
+Budget: ~7 min D4 content, ~6 min Demo E, ~5 min D5 content, ~6 min Demo F, 4 min for two questions, 2 min Q&A. That matches the lessons: about 15 min for Lesson 04 and 12 for Lesson 05.
+
+---
+
+.eyebrow-label[D4 · Workflow Integration and Solution Design · 16%]
+
+# What the exam asks
+
+.objectives[
+- Apply Claude to analyze requirements and use cases
+- Leverage Claude for research, planning, and process optimization
+- Use Claude to support solution design, development, and iteration
+- Integrate Claude into existing workflows to augment or redesign them
+- Communicate Claude's value and limitations to stakeholders
+]
+
+.source-line[Verbatim objectives · Exam Guide v1.0, Section 6]
+
+???
+The prep course frames D4 as moving from "I use Claude" to "our workflow uses Claude": deciding which steps go to the model and which stay with people.
+
+Before prompting, define the deliverable, the audience, the sources, and what success looks like.
+
+---
+
+# Map the work into three buckets
+
+.grid-3[
+.card[
+.tag.c-tag[CLAUDE HANDLES]
+Standardized, documented, repeatable. FAQ drafts, reformatting, extraction.
+]
+.card[
+.tag.s-tag[CLAUDE ASSISTS, HUMAN DECIDES]
+Claude prepares. A person reviews before anything ships.
+]
+.card[
+.tag.w-tag[HUMAN HANDLES]
+High stakes, emotionally sensitive, or accountable judgment.
+]
+]
+
+**Sort with three questions:** Can we reverse it? What are the stakes? Who is accountable?
+
+???
+Academy line: "Task Delegation means asking 'should AI do this?' not just 'can it?'" Complaints and judgment calls stay human.
+
+Audit questions for each task: how often, how long each time, standardized or variable, what happens if it is imperfect.
+
+"Can Claude do X?" gets answered with a division of labor: what Claude drafts, what humans judge, and where the review step sits.
+
+---
+
+# Augment or redesign?
+
+.two-col[
+<div>
+<div class="col-head blue">AUGMENT</div>
+Same process. Claude speeds up steps inside it.
+<span style="display:block;margin-top:0.5em"><em>Claude drafts the weekly ticket summary. The same lead sends it.</em></span>
+</div>
+<div>
+<div class="col-head green">REDESIGN</div>
+Change the process. Remove steps, add checkpoints, move handoffs.
+<span style="display:block;margin-top:0.5em"><em>A help-center article removes half the "how do I export" tickets.</em></span>
+</div>
+]
+
+- Ask whether a step is needed before you automate it.
+- Pilot one workflow, measure, then expand.
+- Keep human approval where actions are hard to reverse.
+
+???
+Automating unnecessary work makes waste faster.
+
+Gradual release: grant autonomy in proportion to demonstrated reliability, then expand it deliberately. Scheduled tasks should draft for review until trusted.
+
+Research and planning are D4 use cases too: competitive analysis, launch plans, pre-meeting briefings. Research mode fits these.
+
+---
+
+# Communicate value and limits, and know when to escalate
+
+**Stakeholder note** = one concrete benefit + one honest limit + the named human approver.
+
+| Situation | Escalate to |
+|---|---|
+| Integrations, APIs, automated pipelines, agents | Claude Developers or Architects |
+| Legal, medical, financial, or HR judgment | A qualified human |
+| Unsure if data or use is allowed | The data or policy owner |
+
+???
+Adoption metrics are diagnostics. Pair usage numbers with work outcomes. The month a diagnostic becomes a quota, people optimize for the number.
+
+A simple AI use statement has three parts: what we use AI for, what stays human, how we stay accountable.
+
+Escalation boundary from the guide: Associates are not expected to design enterprise-scale architectures or integrations. That scope belongs to Developers and Architects.
+
+Distractor alert: "escalate everything to IT" is over-engineering. Escalate the integration, keep the drafting.
+
+---
+
+class: demo
+
+.demo-banner[Live demo E · Workflow map · ~6 min]
+
+# Requirements, delegation map, stakeholder note
+
+- **Lesson:** `lessons/04-workflow-integration.md` → Demo: map a workflow and write the stakeholder note
+- **Upload:** `assets/demo-files/meeting-notes-raw.md`
+- **Do:** let Claude interview you, map the weekly ticket summary, test Mei's auto-send idea, write Dana's note to Tom
+- **Watch for:** legal check before upload · Dana approves · auto-pull escalates · augment first
+
+```
+I'm Dana, the ops lead in these notes. I want to design a workflow for the "weekly summary of tickets by category" that nobody owns today. Before proposing anything, ask me up to 5 questions about deliverable, audience, data sources, success criteria, and constraints. Ask them all in one message.
+```
+
+???
+Paste the prepared answers from lesson step 3 in one go: Monday 10:00 one-pager, audience Dana and Raj, CSV with customer emails not yet cleared by legal, success = on time and matches a 10-ticket spot check, no tool budget until Nov 1 and nobody codes.
+
+Then the delegation-map prompt (table: Step | Who does it | Why | Risk or dependency | Escalate to whom), plus augment or redesign and which step to pilot.
+
+A good map: the legal check and removal of customer emails come before any upload. Claude categorizes and drafts. Dana reviews before sharing. Dana or Raj owns it. Any automatic pull from the ticketing system goes to a Claude Developer or Architect plus IT review. Augment first with a manual weekly export.
+
+Mei's question ("just let the AI send the promo emails automatically"): a good answer keeps a human approval step. Sending to customers is external and hard to reverse. Push back live if Claude puts it in "Claude handles." That is the favorite D4 trap.
+
+Note to Tom: under 180 words, benefit labeled as an estimate, one limit and how you check it, Dana approves, legal and IT dependencies, no new tool spend. Skip step 8 (the 3-bullet version for Raj) if time is short.
+
+---
+
+.eyebrow-label[D5 · Configuration and Knowledge Management · 12%]
+
+# What the exam asks
+
+.objectives[
+- Configure Claude Projects with instructions and knowledge sources
+- Manage uploaded knowledge and connectors (e.g., Google Drive, Gmail)
+- Create effective system-level instructions
+- Inform, maintain, and update Claude configurations, knowledge sources, and instructions
+]
+
+.source-line[Verbatim objectives · Exam Guide v1.0, Section 6]
+
+???
+Prep course line: configure Claude once, so that every conversation that follows has the right context in place.
+
+---
+
+# Anatomy of a Project
+
+.grid-4[
+.card[
+.tag.w-tag[INSTRUCTIONS]
+Apply to every chat in the Project. Tone, role, rules.
+]
+.card[
+.tag.s-tag[KNOWLEDGE]
+Shared files. Switches to retrieval when large.
+]
+.card[
+.tag.c-tag[DESCRIPTION]
+For people. **Claude doesn't see it.**
+]
+.card[
+.tag.i-tag[CHATS]
+A file uploaded in one chat stays in that chat.
+]
+]
+
+*Each Project also keeps its own memory space.*
+
+???
+Projects: self-contained workspaces with their own memory, chat history, knowledge, and instructions. Use one for reusable reference material, consistent response requirements, or team collaboration.
+
+Retrieval mode: when knowledge nears the context limit, Claude searches project files and pulls only what is relevant, expanding capacity up to about 10x. Paid plans.
+
+Two favorite traps: "the description guides Claude" (it doesn't) and "a file uploaded in one project chat is available to the other chats" (only project knowledge is shared).
+
+Sharing on Team/Enterprise: Can view, Can edit, Owner.
+
+---
+
+class: dense
+
+# Where does it go?
+
+| You want… | Put it in |
+|---|---|
+| Standing tone, role, and rules for one workstream | Project instructions |
+| Reference documents | Project knowledge |
+| Today-only details | The chat prompt |
+| Files or email that change often | A connector |
+| A repeatable procedure | A Skill |
+| Your preferences in every chat | Settings instructions or memory |
+| Org-wide rules | Org instructions (admins set these) |
+
+???
+Short form: instructions tell Claude how to behave. Knowledge tells Claude what to know.
+
+A good instruction includes a guardrail: "All statistics must come from the attached fact sheet. If a figure isn't there, say so."
+
+Structure instructions in topic sections. Resolve conflicting rules ("concise" vs "comprehensive") with an explicit priority.
+
+Keep project instructions concise. Every chat carries them.
+
+Corrections you keep repeating are candidates for instructions. Explanations you keep repeating are candidates for a Skill.
+
+---
+
+# Connectors and Skills
+
+.two-col[
+<div>
+<div class="col-head blue">CONNECTORS</div>
+<ul>
+<li>Read and act in Drive, Gmail, and other tools</li>
+<li>Claude sees what <strong>you</strong> can see</li>
+<li>Scoped, revocable, approval before send or share</li>
+<li>Connect the minimum folders</li>
+</ul>
+</div>
+<div>
+<div class="col-head green">SKILLS</div>
+<ul>
+<li>Saved procedures Claude loads when a task matches</li>
+<li>Projects store knowledge. Skills perform tasks.</li>
+<li>Need code execution turned on</li>
+<li>Install only from trusted sources</li>
+</ul>
+</div>
+]
+
+???
+Connectors run on MCP. Web connectors reach cloud services; desktop extensions reach local tools. Test with "Can you access my Drive?"
+
+Google Workspace specifics: Gmail send/reply/forward and Drive share/move/trash ask for approval by default. The Drive connector works in private projects only. Google Docs added to a Project sync to the latest version.
+
+On Team/Enterprise an Owner enables connectors first. Claude inherits the member's own permissions in the connected service. Common pattern: read-only first, write later with sign-off.
+
+"Connect everything and tell Claude to ignore it" is unreliable. Scope the connector.
+
+Skills: folders of instructions and resources Claude loads on demand. Create one by conversation and manage it in Customize. If a Skill "doesn't work," check whether code execution and file creation are on.
+
+---
+
+# Keep configurations current
+
+- **Replace** superseded documents. Two versions produce mixed answers.
+- **Name files descriptively:** `Q4-2025-sales-report.pdf`.
+- **One owner** per shared Project or Skill.
+- **Change one thing,** then re-run the same test prompts.
+- **Spot-check** after every update.
+- **Promote** repeated corrections into instructions.
+
+???
+Project knowledge does not update itself. Stale knowledge produces confidently outdated answers.
+
+Adding many overlapping documents can dilute retrieval. Curate.
+
+Claude uses file names and proximity to understand relationships. Reference documents by name in prompts.
+
+Shared Skill hygiene from the Cowork course: one owner, evals before publishing, specific names, a quarterly review to retire stale items.
+
+---
+
+class: demo
+
+.demo-banner[Live demo F · Northwind Project · ~6 min]
+
+# Build, test, and update a Project
+
+- **Lesson:** `lessons/05-projects-and-knowledge-management.md` → Demo: Build the "Northwind content" Project
+- **Upload as knowledge:** `assets/demo-files/project-knowledge-brand-voice.md`
+- **Do:** paste the instructions, test a LinkedIn post, test the guardrails, then swap in an edited, dated copy of the file
+- **Watch for:** 120–180 words ending in a question · price and salary claim left out or [CHECK] · 15,000+ only after the old file is gone
+
+```
+You write marketing content for Northwind Learning.
+Sources: use the brand voice file in project knowledge. Only state facts under "Facts we can state". For any other fact, write [CHECK: fact] and list every [CHECK] at the end.
+Process: identify the asset type, draft to the Formats table, check against "Never use" and "Facts we must NOT state".
+Output: the draft, then "Word count: N · Asset: <type>".
+```
+
+???
+Step 1: description "Drafts newsletter blurbs, LinkedIn posts, and course descriptions for Northwind Learning." Remind the room Claude never reads it. Full instructions are in lesson step 3.
+
+Happy path: "Write a LinkedIn post announcing our new course "Feedback That Lands", which teaches team leads how to give feedback in under five minutes." Expect Problem → example → takeaway → question, second person, no banned words, the word-count line.
+
+Guardrails, same chat: "Now write a newsletter blurb for the same course. Mention the price and say that graduates get a 20% salary increase." Expect no price and no salary claim (or [CHECK]), a pointer to the pricing page, 60–90 words.
+
+Update: edit 12,000+ to 15,000+ locally, save as project-knowledge-brand-voice-2026-10.md, remove the old file from knowledge, upload the new one, ask "How long are Northwind courses, and how many learners have we had?" in a new chat. Keeping both files would mix the numbers.
+
+Optional if ahead of time: step 6 isolation (a file uploaded in one chat is invisible to the next chat) and step 8 (a hashtag rule in the description does nothing; in the instructions it works).
+
+Keep this Project. Lesson 07 Demo B adds brand-voice-2023-edition.md to it as the stale file.
+
+---
+
+class: question
+
+.q-label[Original practice item · D4 · multiple response · select 2]
+
+.stem[An HR manager asks whether Claude can "run" the quarterly engagement survey: draft the questions, summarize 400 free-text comments, and decide which managers get coaching. Which TWO responses best fit the Associate role?]
+
+.options[
+- **A.** Use Claude to draft questions and theme the comments. HR decides who gets coaching.
+- **B.** Have Claude rank managers for coaching, since it removes human bias.
+- **C.** Brief stakeholders with one benefit, one limit, and the named HR approver.
+- **D.** Wait for a Developer to build an automated pipeline before trying anything.
+- **E.** Decline, because survey comments are sensitive.
+]
+
+???
+Deciding phrases: "decide which managers get coaching" (a decision about people) and "run" (the stakeholder is asking for more autonomy than fits).
+
+---
+
+class: answer
+
+.q-label[D4 practice item · Answer]
+
+.correct[A + C · Split the work, then communicate value, limits, and the approver]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| B | Blind trust | Decisions about people stay with an accountable human |
+| D | Over-engineering | Drafting and theming need no integration |
+| E | Over-reaction | Check policy and anonymize, then proceed |
+
+???
+On E: free-text comments can identify people even with names removed. The proportionate path is to follow the HR data policy, strip identifiers, and keep the analysis going.
+
+On B: Claude can organize evidence for the decision. The manager owns the call.
+
+---
+
+class: question
+
+.q-label[Original practice item · D5 · select 1]
+
+.stem[A team's "Client FAQ" Project still answers refund questions from last year's policy. Legal published a new policy PDF last week. One colleague uploaded it into her chat and got the right answer. Everyone else still gets the old one. What is the best fix?]
+
+.options[
+- **A.** Ask everyone to upload the new PDF at the start of each chat.
+- **B.** Replace the old policy in Project knowledge with the new one, then spot-check refund questions.
+- **C.** Add the new PDF to Project knowledge next to the old one.
+- **D.** Update the Project description to say "use the 2026 policy."
+]
+
+???
+Deciding phrases: "uploaded it into her chat" (chat uploads stay in that chat) and "everyone else" (a shared fix is needed).
+
+---
+
+class: answer
+
+.q-label[D5 practice item · Answer]
+
+.correct[B · Replace the superseded file in knowledge, then spot-check]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Irrelevant fix | Per-chat uploads never reach the Project |
+| C | Irrelevant fix | Two versions produce mixed answers |
+| D | Fake safeguard | Claude doesn't see the description |
+
+???
+This one item tests three D5 facts at once: chat uploads stay in the chat, knowledge does not self-update, and the description is invisible to Claude.
+
+---
+
+class: center, middle, cue
+
+.eyebrow-label[1:28 → 1:30 · Segment 3 wrap]
+
+# Q&A
+
+Delegation · stakeholders · Projects · connectors · Skills
+
+???
+Two minutes. If someone asks about enterprise admin settings: the exam treats those lightly. Admins set policy; Associates follow it.
+
+---
+
+class: title, divider
+
+.session-label[SEGMENT 4 · 1:30 → 1:50 · 20 MIN]
+
+# Governance, troubleshooting, and exam strategy
+
+.chips[
+.chip[D6 Governance, Risk, and Responsible Use · **15%**]
+.chip[D7 Troubleshooting and Optimization · **10%**]
+]
+
+.footer[25% of the exam · Lessons 06 + 07 + 08<span>Demos: G anonymize · H diagnose a bad prompt</span>]
+
+???
+Tightest segment: 25% of the exam in 20 minutes. Budget: ~5 min D6, ~4 min Demo G, ~3 min D7, ~3 min Demo H, ~4 min exam-day strategy and the two questions, 1 min Q&A. Move fast; the lessons hold the detail.
+
+No time for Lesson 06 Demo B (high-risk triage) or Lesson 07 Demo B (stale file in the Project). Both are in the presenter notes for Demos G and H as optional extras.
+
+---
+
+.eyebrow-label[D6 · Governance, Risk, and Responsible Use · 15%]
+
+# What the exam asks
+
+.objectives[
+- Identify appropriate and inappropriate use cases
+- Apply data sensitivity, regulatory, and privacy considerations
+- Follow organizational AI policies and governance standards
+- Understand the ethical implications of AI usage
+]
+
+.source-line[Verbatim objectives · Exam Guide v1.0, Section 6]
+
+???
+Two decision rules carry most D6 items. If the output affects rights, money, health, or legal standing, a qualified human owns the call. If the data would cause harm if leaked, the policy check comes before productivity.
+
+---
+
+# High-risk uses and disclosure
+
+.two-col[
+<div>
+<div class="col-head">HIGH-RISK USES</div>
+Legal · healthcare · insurance · finance · employment and housing · academic testing · media
+<span style="display:block;margin-top:0.6em"><strong>Require a qualified human reviewer and disclosure of AI involvement.</strong></span>
+</div>
+<div>
+<div class="col-head green">A DISCLOSURE STATEMENT SAYS</div>
+<ul>
+<li>What AI helped with</li>
+<li>Which tool</li>
+<li>What you reviewed</li>
+<li>What you changed</li>
+<li>Who is responsible</li>
+</ul>
+</div>
+]
+
+???
+High-risk list from Anthropic's Usage Policy: https://www.anthropic.com/legal/aup. Consumer-facing chatbots must disclose that users are talking to AI.
+
+Inappropriate uses an Associate should spot: final decisions about people without human review, presenting AI output as human-written, fabricated testimonials, age-coded job ads, working around a refusal or a policy.
+
+Disclosure statement elements come from Anthropic's "Writing an AI diligence statement" tutorial. Diligence has three parts: Creation (which tools and how), Transparency (honest about AI's role), Deployment (verify and vouch for what you share).
+
+Accountability stays with whoever sends or files the work. The tool does not take it.
+
+---
+
+class: dense
+
+# Data sensitivity: make the task safe, then do it
+
+| Data | Example | Action |
+|---|---|---|
+| Public | Published blog post | Use freely |
+| Internal | Meeting notes, drafts | Approved workspace, per policy |
+| Personal | Names, emails, account numbers | Remove or pseudonymize first |
+| Regulated or special | Health, HR files, financial records | Follow policy and ask the data owner |
+
+**"Tell Claude not to retain it" is an instruction. Controls live outside the prompt.**
+
+???
+Sample 3 logic in table form. Three wrong answers: upload as-is, tell the model to ignore or not retain, abandon the task.
+
+Free text can still identify people after names are removed. Check comment fields.
+
+Neither the requester's seniority nor the purpose overrides policy. "Legal asked for it" does not change what may be uploaded.
+
+"Summarizing" customer data still means submitting it.
+
+---
+
+class: dense
+
+# Retention and policy: admins set it, you follow it
+
+| Plan | Training on your chats | Retention |
+|---|---|---|
+| Free · Pro · Max (consumer) | Your choice in Privacy settings | 5 years if opted in · 30 days if opted out |
+| Team · Enterprise (commercial) | Off by default | Set by your organization |
+| Incognito chat | Not saved to history | Org retention still applies |
+
+*Use the approved workspace. Personal accounts for work data create a policy gap.*
+
+???
+Sources: Anthropic consumer terms update and data-usage docs. Pro and Max are consumer plans; they follow the same opt-in choice as Free. A common trap is "paid means never trained on."
+
+Enterprise admin controls exist (custom retention with a 30-day minimum, audit logs, SSO, role permissions). The exam treats these lightly. Know that admins set them and the Associate follows them.
+
+Shadow AI scenario: staff paste client drafts into personal accounts because the approved tool is hard to reach. The durable answer contains the practice and removes the friction so the compliant path is the easy one. Banning all AI is over-reaction.
+
+If something goes wrong: act fast, delete the conversation, report per policy.
+
+---
+
+class: demo
+
+.demo-banner[Live demo G · Anonymize before upload · ~4 min]
+
+# Plan the redaction, then analyze churn
+
+- **Lesson:** `lessons/06-governance-and-responsible-use.md` → Demo A: Anonymize, then analyze churn
+- **Show, never upload:** `customer-accounts.csv` (names, account numbers, emails)
+- **Upload:** `customer-accounts-anonymized.csv`, after the plan
+- **Watch for:** codes replace account numbers · dates go to month · 6 of 16 churned · count Basic 4/6 yourself
+
+```
+My company policy does not allow me to upload customer names, emails, or account numbers. Below is my header row and one made-up row. Do not analyze anything yet.
+customer_name,account_number,email,region,plan,signup_date,monthly_spend_usd,support_tickets_90d,nps,churned
+Jane Example,AC-00000,jane@example.com,EMEA,Pro,2025-02-11,420,1,9,no
+For each column: keep, remove, replace with a code, or generalize, with a one-line reason. Then list re-identification risks. The file has 16 rows.
+```
+
+???
+Open the raw CSV on screen in a spreadsheet app. Do not drag it into Claude.
+
+Plan expected: remove customer_name and email, replace account_number with a code (lookup key stays on your machine), generalize signup_date to month, keep the analysis columns. A strong answer warns that exact spend can single out a large customer. Open question for the room: band monthly_spend_usd? The single LATAM Enterprise account stands out.
+
+Anonymize outside Claude, compare with customer-accounts-anonymized.csv (C001…, YYYY-MM), then upload it with the lesson's step 4 prompt: churn by plan and region as "churned / total", churned vs retained on tickets and NPS, up to three patterns with evidence, a "Limits of this analysis" section, no causes the data doesn't show.
+
+Expected: 6 of 16 churned. Basic 4/6, Pro 2/6, Enterprise 0/4. Every churned account had 4+ tickets and NPS 5 or lower. No retained account had more than 3 tickets. Limits: 16 rows, association without cause. Count Basic yourself in the file.
+
+Point out what never appears as a step: "tell Claude not to retain it." This is Sample 3, hands-on. Step 6 (diligence statement) is homework.
+
+Optional, only if ahead of time: Lesson 06 Demo B, high-risk triage (3 min). The room votes on six use cases, then Claude classifies them. High-risk: 2 healthcare, 3 employment, 4 housing, 6 media. Confirm at https://www.anthropic.com/legal/aup.
+
+---
+
+.eyebrow-label[D7 · Troubleshooting and Optimization · 10%]
+
+# What the exam asks
+
+.objectives[
+- Identify, diagnose, and resolve issues with underperforming prompts or poor outputs
+- Adjust approach based on feedback and results
+- Optimize workflows for efficiency and effectiveness
+]
+
+**Diagnose before you rewrite:** What changed? · Context? · Instructions? · Model and effort? · Source?
+
+???
+The five-question checklist:
+1. What changed? Prompt, files, knowledge, model, settings, inputs.
+2. Context: does Claude have the source, the audience, the purpose?
+3. Instructions: clear, conflicting, buried in the middle, or drifted?
+4. Model and effort: right tier and effort level for the task?
+5. Source: is the answer grounded in something checkable?
+
+If you cannot reproduce a problem, get the exact prompt, inputs, and configuration first.
+
+Run-to-run variation is normal. Design the workflow to tolerate it.
+
+---
+
+class: dense
+
+# Symptom → cause → first fix
+
+| Symptom | Likely cause | First fix |
+|---|---|---|
+| Generic output | Missing context | Add audience, purpose, source, example |
+| Wrong format | Format described vaguely | Show a filled example |
+| Confident but wrong | No grounding source | Attach or connect the source, then verify |
+| Ignores early rules | Long-chat drift | Restart with a summary, move rules to a Project |
+| Half the request ignored | Too many asks at once | Decompose |
+| Teammates get different results | No shared setup | Shared Project |
+
+**Optimize:** reuse Projects and Skills, right-size model and effort, fix the real bottleneck.
+
+???
+Too long or too short: Claude is guessing the length. Give a word or bullet limit.
+
+Confidently wrong math: offload to code execution, then still check the logic and the input data.
+
+If one analyst succeeds and others fail with the same prompt, look for context the first analyst supplies without noticing.
+
+Optimization means lower cost and time at equal quality. Often the slow part is the human steps around Claude. Usage savers: start fresh chats for new tasks, turn off unused connectors, keep project instructions short, lower effort for routine work.
+
+Feedback loop: keep 5–10 test cases for a recurring task and re-run them after each change. Change one variable at a time.
+
+---
+
+class: demo
+
+.demo-banner[Live demo H · Diagnose a bad prompt · ~3 min]
+
+# Run it, retry it, diagnose it, fix the cause
+
+- **Lesson:** `lessons/07-troubleshooting-and-optimization.md` → Demo A: Diagnose and fix a bad prompt
+- **Upload (fix step only):** `assets/demo-files/project-knowledge-brand-voice.md`
+- **Do:** run the bad prompt outside any Project, retry once, walk the checklist aloud, then a new chat with the file
+- **Watch for:** invented names or prices in the bad run · only file-backed facts after the fix
+
+```
+Bad:   write a linkedin post about our courses
+Fixed: You are writing for Northwind Learning's LinkedIn page. Use the attached brand voice file. Only use facts from its "Facts we can state" section. One post about our live online courses for team leads: 120 to 180 words, problem, short example, takeaway, closing question, no "Never use" words. After the post, list each fact you used and its line in the file.
+```
+
+???
+The retry gives a different post that is no better. Retrying changed nothing about the cause.
+
+Checklist answers: What changed? Nothing, first attempt. Context? Claude knows nothing about "our courses", the audience, or the rules. Instructions? No audience, length, structure, or tone. Model? Fine for a short post; a bigger model would not know our facts either. Source? None, so any specifics were invented.
+
+Fixed post: 120–180 words, four-part structure, only 4 weeks, 2 hours per week, live online, 12,000+ learners. No pricing, no banned words. The fact list lets you verify each claim in seconds.
+
+Point out what we did not do: switch models, regenerate, add capital letters. Those are the irrelevant fixes and over-engineering from Segment 1.
+
+Optional, only if Demo F's Project exists and time allows: Lesson 07 Demo B, "What changed?". Add brand-voice-2023-edition.md to the Northwind content Project's knowledge, keep the current file, and ask in a new chat: "Write a promo email for our October webinar on giving feedback." Look for $499 or $399, Brightline Consulting, the promotion statistic, or exclamation points. Remove the 2023 file, change nothing else, rerun. Otherwise assign it as homework.
+
+---
+
+class: question
+
+.q-label[Original practice item · D6 · select 1]
+
+.stem[A recruiter wants Claude to score 60 applicants' CVs against the job criteria and automatically send rejection emails to the bottom half. What is the most appropriate approach?]
+
+.options[
+- **A.** Proceed, because Claude applies the criteria more consistently than people.
+- **B.** Use Claude to summarize each CV against the published criteria. A recruiter makes and sends every decision.
+- **C.** Remove names from the CVs first, then let Claude send the rejections.
+- **D.** Stop using Claude for any hiring task.
+]
+
+???
+Deciding phrases: "applicants" (employment is a high-risk use) and "automatically send rejection emails" (a decision about people, external, hard to reverse).
+
+---
+
+class: answer
+
+.q-label[D6 practice item · Answer]
+
+.correct[B · Claude prepares the evidence. A qualified human decides and sends.]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Blind trust | Employment decisions need qualified human review |
+| C | Fake safeguard | Anonymizing protects privacy. A human still owns the decision. |
+| D | Over-reaction | Summaries against criteria are a safe, useful step |
+
+???
+Employment appears on the Usage Policy's high-risk list. Human-in-the-loop means a qualified professional reviews the content or decision.
+
+Ethics angle: monitor for bias in how criteria get applied. Consistency is not fairness if the criteria or the summaries carry bias.
+
+---
+
+class: question
+
+.q-label[Original practice item · D7 · select 1]
+
+.stem[A weekly-summary prompt worked for two months. This week the output skips the "Risks" section. The prompt didn't change, but a teammate added three new reports to the Project knowledge and switched the default model to save usage. What should you do first?]
+
+.options[
+- **A.** Rewrite the prompt from scratch.
+- **B.** Undo one change at a time (model, then new files) and re-run the same input.
+- **C.** Move to the most capable model permanently.
+- **D.** Add "DO NOT SKIP THE RISKS SECTION" in capitals.
+]
+
+???
+Deciding phrase: "worked for two months" plus two named changes. The stem hands you the diagnosis.
+
+---
+
+class: answer
+
+.q-label[D7 practice item · Answer]
+
+.correct[B · Isolate what changed, one variable at a time]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| A | Irrelevant fix | The prompt is the one thing that didn't change |
+| C | Over-engineering | Spends more before you know the cause |
+| D | Irrelevant fix | Intensifiers add no structure |
+
+*When something that worked breaks, suspect what changed.*
+
+???
+If the model change is the cause, the fix may be raising effort or restoring the tier for this one task. If the new files are the cause, they may dilute or contradict the old sources.
+
+---
+
+# Exam-day strategy
+
+| Phase | Move |
+|---|---|
+| Pace | Three passes: every item by 80 min, flagged items by 110, final sweep to 120. |
+| Read | Find the constraint: cost, privacy, speed, stakes, policy, audience. |
+| Eliminate | Name the distractor pattern and cross it out. |
+| Choose | The proportionate step that lets work continue safely. |
+| Multiple response | Read "select N" first. Judge each option as true or false. All-or-nothing. |
+| Finish | No blanks. Exactly N picks per multiple-response item. Change an answer only with a named reason. |
+
+???
+Pass 1 checkpoints: item 15 at about 20 min, 30 at 40, 45 at 60, 60 at 80. Past 2 minutes on an item: pick your best answer, flag it, move on. Behind a checkpoint: speed up on the next few items instead of rushing the last ten.
+
+Tie-breaker: choose the option a careful professional would defend to the risk owner.
+
+The longest, most elaborate option often over-engineers. "Most appropriate" does not mean "most thorough."
+
+Two options usually survive elimination. Pick the one that changes the system over the one that compensates around it.
+
+Closed book: no notes, phones, second monitor, smartwatch, or translation tools. Using AI during the exam is prohibited. Online: stay in webcam view the whole time.
+
+---
+
+class: dense
+
+# Cue words in the stem
+
+| If the stem says… | Your first instinct |
+|---|---|
+| "every week", "same format", "the team" | Project |
+| "customer", "regulator", "legal", "executive" | Verify, then qualified human review |
+| "names", "accounts", "PII", "policy restricts" | Anonymize first |
+| "last month", "current", "latest" | Web search or Research, then check citations |
+| "hundreds", "routine", "fast", "cheap" | Faster, lower-cost model |
+| "integrate", "automate with our system" | Escalate to Developers or Architects |
+| "it worked until…" | Find what changed |
+
+???
+These cues come from the core exam logic. Treat them as first instincts. Always read the whole stem: a later sentence can change the constraint.
+
+---
+
+class: center, middle, cue
+
+.eyebrow-label[1:49 → 1:50 · Segment 4 wrap]
+
+# Q&A
+
+Governance · data · troubleshooting · exam-day tactics
+
+???
+One minute. Keep it moving into the study plan.
+
+---
+
+class: title, divider
+
+.session-label[SEGMENT 5 · 1:50 → 2:00 · 10 MIN]
+
+# Your four-week study plan
+
+.chips[
+.chip[All 7 domains · **100%**]
+.chip[Registration and rescheduling]
+.chip[Self-assessment]
+]
+
+.footer[Lesson 08 + practice questions<span>Demo: I self-assessment</span>]
+
+???
+Budget: 1 min registration, 2 min plan, 3 min self-assessment demo, 1 min final question, 3 min close and Q&A.
+
+---
+
+class: dense
+
+# Registration and rescheduling
+
+| Step | Rule |
+|---|---|
+| Eligibility | Claude Partner Network company email |
+| Register | Partner Academy → pay → schedule with Pearson VUE |
+| Reschedule or cancel | **48 hours ahead** (the safe rule) |
+| ID | Government photo ID. Name matches registration exactly. |
+| Retakes | Wait 14 / 30 / 90 days · max 4 attempts per 12 months |
+| Renewal | Free, non-proctored, before the 12 months end |
+
+???
+The exam guide says 24 hours. The FAQ and policies page say 48 hours. Use 48 so you never forfeit the fee.
+
+Cancelling in Pearson does not refund automatically: email certifications-support@anthropic.com.
+
+No-show or late arrival forfeits the fee.
+
+Name corrections: email certifications-support@anthropic.com at least 24 hours before, subject "Name Correction Request". A mismatch at check-in means no exam and no refund.
+
+Accommodations: request through Pearson VUE about 10 days ahead, before scheduling.
+
+A lapsed credential means the full exam at full fee again. Each retake costs the full fee (with any tier discount).
+
+---
+
+class: dense
+
+# Four weeks, weighted by the blueprint
+
+| Week | Focus | Do this |
+|---|---|---|
+| 1 | Blueprint · D3 · D1 | Read the guide. Score the rubric. Prep courses 1–2. Practice Q1–7, Q19–24. |
+| 2 | **D2 (21%)** · D4 | Verify real outputs against sources. Map one workflow. Practice Q8–18, Q25–32. |
+| 3 | D5 · D6 · D7 | Build a Project. Anonymize a file. Run the checklist. Practice Q33–50. Re-score. |
+| 4 | Review | All 50 items in 100 min. Redo your two weakest domains. Confirm logistics. |
+
+*About 20 hours: 45–60 min on weekdays, 90 min on one weekend day.*
+
+???
+Day-by-day version in Lesson 08, section 7. Resources: the official 8-course prep path on Partner Academy (about 6.5 hours total), the free AI Fluency and Claude 101 courses on academy.claude.com, and `lessons/practice-questions.md` (50 original items weighted by domain).
+
+Label every miss: Knowledge (didn't know a fact), Reading (missed the constraint or the "select N"), or Judgment (knew the facts, still picked an over-reaction or a fake safeguard). Knowledge misses need the lesson again. Reading misses need slower stems. Judgment misses need more distractor practice.
+
+Ready to book: at least 2 on every objective, 3 on most of D2, and a practice score that holds steady across two attempts a week apart. Week 4 Thursday: confirm the appointment is more than 48 hours out, the ID name matches, and the system test passes.
+
+---
+
+# Score yourself on all 30 objectives
+
+| Score | Meaning |
+|---|---|
+| 0 | I can't explain what this objective means |
+| 1 | I can explain it, but I haven't done it in Claude |
+| 2 | I've done it in Claude with some guidance |
+| 3 | I do it routinely and can say why wrong answers fail |
+
+**Priority = (3 − domain average) × domain weight.** Start with the biggest number.
+
+???
+Example from Lesson 08: D2 average 1.5 gives (3 − 1.5) × 21 = 31.5. D7 average 1.0 gives (3 − 1.0) × 10 = 20. D2 comes first even though the D7 score is lower, because D2 carries twice the weight.
+
+The 30 objectives are the verbatim bullets from the domain slides today and the exam guide's Section 6.
+
+---
+
+class: demo
+
+.demo-banner[Live demo I · Self-assessment · ~3 min]
+
+# Score yourself, then let Claude draft the plan
+
+- **Lesson:** `lessons/08-exam-strategy-and-study-plan.md` → Exercise: self-assessment
+- **Upload:** nothing. Paste your rubric scores.
+- **Do:** run the prompt with sample scores, then recompute one priority number by hand
+- **Watch for:** Claude's arithmetic. Correct it before you adopt the plan. D2 should get real time.
+
+```
+I'm preparing for the CCAO-F exam. Domain weights: D1 14%, D2 21%, D3 12%, D4 16%, D5 12%, D6 15%, D7 10%.
+My self-assessment scores (0–3): D1: [...] D2: [...] D3: [...] D4: [...] D5: [...] D6: [...] D7: [...]
+I can study [N] minutes on weekdays and [N] on weekends for four weeks.
+Build a four-week plan as a table (week, day, focus objective, activity). Rank domains by (3 minus my average score) times the domain weight, and show that calculation first.
+```
+
+???
+Sample scores to paste live: D1 2,2,2,1 · D2 2,1,1,2,2,1 · D3 2,2,2,2 · D4 1,2,2,1,2 · D5 2,2,1,2 · D6 2,1,2,2 · D7 1,1,1.
+
+Correct ranking: D2 31.5, D4 22.4, D7 20, D6 18.75, D1 17.5, D5 15, D3 12. Recompute D2 aloud: average 1.5, (3 − 1.5) × 21 = 31.5.
+
+The full exercise takes 10 minutes (4 score, 2 calculate, 3 draft, 1 check). Attendees fill in the 30-objective rubric as homework and rescore at the end of Week 3.
+
+---
+
+class: question
+
+.q-label[Original practice item · D6 + D2 · multiple response · select 2]
+
+.stem[A consultant uses Claude to draft a client workshop deck, including market statistics. Which TWO actions best reflect responsible use before the workshop?]
+
+.options[
+- **A.** Tell the client which parts Claude drafted and who reviewed them.
+- **B.** Verify each statistic against its original source.
+- **C.** Ask Claude to add "AI-verified" to each slide.
+- **D.** Use the most capable model so review isn't needed.
+- **E.** Remove the slides Claude drafted so no disclosure is needed.
+]
+
+???
+This is the Diligence lens in one item: transparency (A) and deployment, meaning verify what you share (B).
+
+---
+
+class: answer
+
+.q-label[Final practice item · Answer]
+
+.correct[A + B · Disclose AI's role and verify what you present]
+
+| Option | Pattern | Why it fails |
+|---|---|---|
+| C | Fake safeguard | A label is not verification |
+| D | Over-engineering | No model removes the need to check |
+| E | Over-reaction | Throws away good work to dodge disclosure |
+
+???
+Close the loop on the 4Ds: Delegation chose Claude for drafting, Description shaped the deck, Discernment checked the statistics, Diligence disclosed and took responsibility.
+
+---
+
+.takeaways[
+# If you remember five things
+
+<ol>
+<li><span class="num">1</span><div class="body"><strong>Confidence is not evidence.</strong><span>Check names, numbers, dates, citations, and quotes against the source.</span></div></li>
+<li><span class="num">2</span><div class="body"><strong>Match the feature and model to the task.</strong><span>Faster tier for volume. Top tier for hard reasoning. Projects for recurring context.</span></div></li>
+<li><span class="num">3</span><div class="body"><strong>Make the task safe, then do it.</strong><span>Anonymize before upload. An instruction to Claude is not a control.</span></div></li>
+<li><span class="num">4</span><div class="body"><strong>Diagnose what changed before you rewrite.</strong><span>One variable at a time.</span></div></li>
+<li><span class="num">5</span><div class="body"><strong>Pick the proportionate step.</strong><span>Escalate integrations and high-stakes calls. Keep the rest of the work moving.</span></div></li>
+</ol>
+]
+
+???
+Read these slowly. Every official sample and every practice item today reduced to one of these five.
+
+---
+
+class: title
+
+.session-label[RESOURCES · Q&A]
+
+# Thank you. Questions?
+
+- [Official Exam Guide v1.0 (PDF)](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542847%2FClaude+Certified+Associate+%E2%80%93+Foundations+Exam+Guide.pdf)
+- [Partner Academy prep path](https://anthropic-partners.skilljar.com/path/claude-certified-associate-foundations) · 8 courses
+- [AI Fluency: Framework and Foundations](https://academy.claude.com/courses/ai-fluency-framework-foundations) · academy.claude.com
+- [Course repo](https://github.com/EnkrateiaLucca/claude-advocate-cert) · lessons, 50 practice items, demo files
+
+.footer[Lucas Soares<span>O'Reilly Live Training</span>]
+
+???
+Final Q&A. Point people to `lessons/practice-questions.md` for 50 original items weighted by domain, and to the cheatsheet in the repo.
+
+Certification FAQ for eligibility and policies: https://anthropic-partners.skilljar.com/page/faq-certifications
+
+Pearson VUE scheduling: pearsonvue.com/us/en/anthropic.html
+
+  </textarea>
+  <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+  <script>
+    var slideshow = remark.create({
+      ratio: '16:9',
+      countIncrementalSlides: false,
+      highlightLanguage: 'no-highlight',
+      navigation: { scroll: false }
+    });
+  </script>
+</body>
+</html>

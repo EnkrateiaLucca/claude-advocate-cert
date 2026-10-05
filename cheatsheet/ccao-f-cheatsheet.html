@@ -1,0 +1,1052 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CCAO-F Cheatsheet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e6;
+    --cream-2: #ebe4d4;
+    --paper: #fbf8f1;
+    --line: #ddd5c0;
+    --ink: #1a1a1a;
+    --ink-2: #444;
+    --muted: #6b6559;
+    --accent: #b85c1f;
+    --gold: #d9a441;
+    --trap-bg: #fbefe4;
+  }
+  @page {
+    size: Letter;
+    margin: 0.34in 0.34in 0.4in;
+    @bottom-left { content: "CCAO-F Exam Cheatsheet · Claude Certified Associate – Foundations"; font: 600 6.5pt Inter, sans-serif; color: #8a8478; }
+    @bottom-right { content: counter(page) " / " counter(pages); font: 600 6.5pt Inter, sans-serif; color: #8a8478; }
+  }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt; line-height: 1.23; color: var(--ink); background: #fff;
+  }
+  @media screen { body { max-width: 8.5in; margin: 20px auto; padding: 0 16px; } }
+  .page { break-before: page; }
+  h1, h2, h3, h4, p, ul, ol { margin: 0; }
+  ul, ol { padding-left: 1.15em; }
+  li { margin: 0.5px 0; }
+  b, strong { font-weight: 700; }
+  a { color: var(--accent); text-decoration: none; }
+  .muted { color: var(--muted); }
+  .small { font-size: 7.8pt; line-height: 1.2; }
+  .acc { color: var(--accent); font-weight: 700; }
+
+  /* header */
+  .masthead {
+    background: var(--ink); color: var(--cream); padding: 8px 12px 7px; border-radius: 4px;
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 10px;
+    border-top: 4px solid var(--gold);
+  }
+  .masthead .kicker { color: var(--gold); font-size: 7pt; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+  .masthead h1 { font-size: 15.5pt; font-weight: 800; line-height: 1.1; margin-top: 2px; }
+  .masthead .sub { font-size: 7.6pt; color: #c9c4b5; text-align: right; max-width: 2.6in; }
+
+  /* section headers */
+  .sec-h {
+    display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+    border-bottom: 2px solid var(--ink); padding-bottom: 1px; margin: 6px 0 4px;
+  }
+  .sec-h h2 { font-size: 12.5pt; font-weight: 800; }
+  .sec-h .code { background: var(--accent); color: #fff; font-weight: 800; font-size: 9pt; padding: 1px 6px; border-radius: 3px; }
+  .sec-h .meta { margin-left: auto; font-size: 7.6pt; color: var(--muted); font-weight: 600; }
+  .sec-h .meta b { color: var(--accent); }
+  .sec-h .fourd { background: var(--gold); color: var(--ink); font-size: 7pt; font-weight: 700; padding: 1px 5px; border-radius: 3px; letter-spacing: 0.04em; }
+
+  .objectives {
+    background: var(--cream); border-left: 3px solid var(--gold); padding: 3px 8px 3px 6px;
+    font-size: 7.3pt; line-height: 1.18; color: var(--ink-2); margin-bottom: 4px; break-inside: avoid;
+  }
+  .objectives .lbl { font-weight: 700; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; font-size: 6.8pt; margin-right: 3px; }
+  .objectives ol { columns: 2; column-gap: 14px; padding-left: 1.6em; margin-top: 1px; }
+  .objectives ol li { break-inside: avoid; }
+
+
+  .head { break-inside: avoid; }
+  .sec-h, .objectives, .card h4 { break-after: avoid; }
+  /* cards & layout */
+  .cols { column-count: 2; column-gap: 9px; }
+  .cols-3 { column-count: 3; column-gap: 8px; }
+  .card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 3px;
+    padding: 3px 6px 3px; margin: 0 0 4.5px; break-inside: avoid; display: block;
+  }
+  .card h4, .tile h4 {
+    font-size: 7.2pt; font-weight: 800; color: var(--accent); text-transform: uppercase;
+    letter-spacing: 0.07em; margin-bottom: 2px;
+  }
+  .card p + p, .card p + ul, .card ul + p, .card table + p, .card p + table { margin-top: 2px; }
+  .card.plain { background: #fff; }
+  .card.flow { break-inside: auto; }
+  tr { break-inside: avoid; }
+  .uc { columns: 2; column-gap: 14px; font-size: 8pt; line-height: 1.2; padding-left: 0; list-style: none; }
+  .uc li { break-inside: avoid; margin: 0 0 1.5px; padding-left: 8px; text-indent: -8px; }
+  .uc li b { color: var(--accent); }
+  .fn { font-size: 7pt; color: var(--muted); font-weight: 400; margin-top: 1px; word-break: break-word; }
+  .card.trap { background: var(--trap-bg); border-color: #e6c9b0; border-left: 3px solid var(--accent); }
+  .card.key { background: #fff; border: 1.5px solid var(--ink); }
+  .row { display: grid; gap: 8px; margin-bottom: 6px; }
+  .row > .card { margin: 0; }
+  .r2 { grid-template-columns: 1fr 1fr; }
+  .r3 { grid-template-columns: 1fr 1fr 1fr; }
+  .r-60 { grid-template-columns: 1.35fr 1fr; }
+  .r-40 { grid-template-columns: 1fr 1.35fr; }
+
+  /* tables */
+  table { width: 100%; border-collapse: collapse; font-size: 7.8pt; line-height: 1.18; }
+  th { background: var(--ink); color: var(--cream); font-weight: 700; text-align: left; padding: 1.5px 3.5px; font-size: 7.4pt; }
+  td { padding: 1px 3.5px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tbody tr:nth-child(even) td { background: rgba(235,228,212,0.45); }
+  td:first-child { font-weight: 700; }
+  td.c, th.c { text-align: center; }
+  .t-acc td:first-child { color: var(--accent); }
+  table.notbold td:first-child { font-weight: 400; }
+  .pat { font-style: italic; color: var(--accent); white-space: nowrap; }
+
+  /* page 1 */
+  .glance { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 6px 0; }
+  .tile { background: var(--cream); border-radius: 3px; padding: 4px 6px; border: 1px solid var(--line); }
+  .tile .big { font-size: 13pt; font-weight: 800; color: var(--ink); line-height: 1.05; }
+  .tile .big small { font-size: 8pt; font-weight: 700; color: var(--accent); }
+  .tile .cap { font-size: 7.3pt; color: var(--ink-2); line-height: 1.22; margin-top: 1px; }
+  .elig { font-size: 7.8pt; background: #fff; border: 1.5px solid var(--ink); border-radius: 3px; padding: 3px 7px; margin-bottom: 6px; }
+  .bar { display: inline-block; height: 7px; background: var(--accent); border-radius: 2px; vertical-align: middle; }
+  .bar.gold { background: var(--gold); }
+  .rules { counter-reset: r; list-style: none; padding: 0; }
+  .rules li { counter-increment: r; position: relative; padding-left: 17px; margin: 2px 0; }
+  .rules li::before {
+    content: counter(r); position: absolute; left: 0; top: 0.5px; width: 12.5px; height: 12.5px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-size: 7pt; font-weight: 800; text-align: center; line-height: 12.5px;
+  }
+  .answer-move { background: var(--ink); color: var(--cream); border-radius: 3px; padding: 5px 9px; font-size: 8.8pt; margin-bottom: 6px; }
+  .answer-move b { color: var(--gold); }
+
+  .links { columns: 3; column-gap: 12px; font-size: 7.6pt; line-height: 1.2; list-style: none; padding: 0; }
+  .links li { break-inside: avoid; margin-bottom: 2px; }
+  .links li span { color: var(--muted); font-size: 7.2pt; word-break: break-all; }
+  .foot-note { font-size: 7.2pt; color: var(--muted); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ============================ PAGE 1 ============================ -->
+<header class="masthead">
+  <div>
+    <div class="kicker">One-page exam summary · Exam code CCAO-F</div>
+    <h1>Claude Certified Associate – Foundations: Exam Cheatsheet</h1>
+  </div>
+  <div class="sub">Companion to the 2-hour O'Reilly exam-prep course. Exam facts follow the official Exam Guide v1.0 (effective July 2026) and the Partner Academy FAQ and policies.</div>
+</header>
+
+<div class="glance">
+  <div class="tile"><div class="big">60 <small>items</small></div><div class="cap">Multiple-choice and multiple-response. Each item states how many to pick.</div></div>
+  <div class="tile"><div class="big">120 <small>min</small></div><div class="cap">About 2 min per item. Plan for ~135 min of seat time.</div></div>
+  <div class="tile"><div class="big">720 <small>/ 1,000</small></div><div class="cap">Scaled cut score on a 100–1,000 scale. A scaled 720 ≠ 72% raw.</div></div>
+  <div class="tile"><div class="big">$99 <small>USD</small></div><div class="cap">Per attempt. Partner-tier discounts may apply.</div></div>
+  <div class="tile"><div class="big">12 <small>months</small></div><div class="cap">Valid 12 months. On-time renewal is free and non-proctored.</div></div>
+  <div class="tile"><h4>Delivery</h4><div class="cap">Pearson VUE, online proctored or at a test center.</div></div>
+  <div class="tile"><h4>Rules</h4><div class="cap">Closed book. English only. No AI tools, notes, or translation tools.</div></div>
+  <div class="tile"><h4>Score report</h4><div class="cap">Pass/fail, scaled score, and percent correct by domain. Only the total decides.</div></div>
+  <div class="tile"><h4>Retakes</h4><div class="cap">Wait 14 / 30 / 90 days after fails 1 / 2 / 3. Max 4 attempts per rolling 12 months.</div></div>
+  <div class="tile"><h4>Reschedule</h4><div class="cap">Change or cancel ≥ <b>48 h</b> ahead. The guide says 24 h; the FAQ and policies say 48 h.</div></div>
+</div>
+<div class="elig"><b class="acc">Eligibility.</b> Registration currently requires a Claude Partner Network company email. Personal addresses do not work. The skills on this sheet still apply to anyone who uses Claude at work.</div>
+
+<div class="row r-60">
+  <div class="card plain">
+    <h4>Blueprint: 7 domains, 30 objectives</h4>
+    <table>
+      <thead><tr><th>#</th><th>Domain</th><th class="c">Weight</th><th class="c">~Items</th><th class="c">Lesson</th></tr></thead>
+      <tbody>
+        <tr><td>D1</td><td>Prompting and Task Execution</td><td class="c">14%</td><td class="c">8</td><td class="c">02</td></tr>
+        <tr><td>D2</td><td><b>Output Evaluation and Validation</b></td><td class="c"><b>21%</b></td><td class="c">13</td><td class="c">03</td></tr>
+        <tr><td>D3</td><td>Product and Model Selection</td><td class="c">12%</td><td class="c">7</td><td class="c">01</td></tr>
+        <tr><td>D4</td><td>Workflow Integration and Solution Design</td><td class="c">16%</td><td class="c">10</td><td class="c">04</td></tr>
+        <tr><td>D5</td><td>Configuration and Knowledge Management</td><td class="c">12%</td><td class="c">7</td><td class="c">05</td></tr>
+        <tr><td>D6</td><td>Governance, Risk, and Responsible Use</td><td class="c">15%</td><td class="c">9</td><td class="c">06</td></tr>
+        <tr><td>D7</td><td>Troubleshooting and Optimization</td><td class="c">10%</td><td class="c">6</td><td class="c">07</td></tr>
+      </tbody>
+    </table>
+    <p class="small muted" style="margin-top:3px">Item counts are weight × 60, rounded. The guide publishes weights only. <b class="acc">D2 alone is 21%.</b> D1 + D2 = 35%. D2 + D4 + D6 = 52%: judgment about accuracy, workflow fit, and risk outweighs feature trivia.</p>
+  </div>
+  <div class="card key">
+    <h4>Core exam logic</h4>
+    <ol class="rules">
+      <li><b>Verify specifics against the source.</b> Model confidence is not evidence.</li>
+      <li><b>Match the model and the feature to the task.</b> Faster tier for volume, top tier for hard reasoning.</li>
+      <li><b>Anonymize before upload.</b> "Tell Claude not to retain it" is not a control.</li>
+      <li><b>Put recurring context in a Project.</b></li>
+      <li><b>Diagnose what changed before rewriting.</b> Change one thing at a time.</li>
+      <li><b>Escalate</b> integrations to Developers or Architects, and high-stakes judgments to qualified humans.</li>
+      <li><b>Pick the proportionate step</b> that lets the work continue safely.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="answer-move"><b>How items are written:</b> a workplace scenario with a role → a constraint in the stem (audience, cost, volume, data policy) → "most appropriate" or "best fits" → four options. One option is proportionate. Three fail in predictable ways. <b>"Most appropriate" does not mean "most thorough."</b></div>
+
+<div class="card plain" style="margin-bottom:6px">
+  <h4>The five distractor patterns: name the pattern, cross it out</h4>
+  <table class="t-acc">
+    <thead><tr><th style="width:15%">Pattern</th><th style="width:47%">What it sounds like</th><th>Why it fails</th></tr></thead>
+    <tbody>
+      <tr><td>Blind trust</td><td>"Send it as-is, Claude was confident." "It cited a source." "It's internal."</td><td>Confidence, citations, and polish are not evidence.</td></tr>
+      <tr><td>Fake safeguard</td><td>"Ask Claude to rate its confidence." "Tell Claude not to retain it." "Use Incognito." "Add a disclaimer."</td><td>It looks like a control and changes nothing about the risk.</td></tr>
+      <tr><td>Irrelevant fix</td><td>"Reword it more formally." "Switch AI platforms." "Put the rule in the Project description."</td><td>It solves a problem the stem does not have.</td></tr>
+      <tr><td>Over-reaction</td><td>"Skip the analysis." "Ban AI for the team." "Rebuild from scratch."</td><td>A proportionate path exists.</td></tr>
+      <tr><td>Over-engineering</td><td>"Top model for every reply." "Escalate everything to Legal." "Fully automate on day one."</td><td>It ignores cost, speed, or the stated scope.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row r-40">
+  <div class="card plain">
+    <h4>The AI Fluency 4Ds as a second lens</h4>
+    <table>
+      <thead><tr><th>4D</th><th>Domains</th><th>The question wants…</th></tr></thead>
+      <tbody>
+        <tr><td>Delegation</td><td>D3, D4</td><td>a split of work between people and Claude</td></tr>
+        <tr><td>Description</td><td>D1, D5</td><td>clearer context, instructions, setup</td></tr>
+        <tr><td>Discernment</td><td>D2, D7</td><td>verification or diagnosis</td></tr>
+        <tr><td>Diligence</td><td>D6, D2</td><td>a real control or a disclosure</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card plain">
+    <h4>Cue words in the stem → first instinct</h4>
+    <table class="notbold">
+      <tbody>
+        <tr><td>"every week", "same format", "the team"</td><td><b>Project</b></td></tr>
+        <tr><td>"customer", "regulator", "legal", "executive"</td><td><b>Verify, then qualified human review</b></td></tr>
+        <tr><td>"names", "accounts", "PII", "policy restricts"</td><td><b>Anonymize first</b></td></tr>
+        <tr><td>"last month", "current", "latest"</td><td><b>Web search or Research, check citations</b></td></tr>
+        <tr><td>"hundreds", "routine", "fast", "cheap"</td><td><b>Faster, lower-cost model</b></td></tr>
+        <tr><td>"integrate", "automate with our system"</td><td><b>Escalate to Developer or Architect</b></td></tr>
+        <tr><td>"it worked until…"</td><td><b>Find what changed</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============================ D1 ============================ -->
+<section class="page">
+<div class="head"><div class="sec-h"><span class="code">D1</span><h2>Prompting and Task Execution</h2><span class="fourd">DESCRIPTION</span><span class="meta"><b>14%</b> · ~8 items · Lesson 02</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Create effective prompts for business and technical tasks</li><li>Apply task decomposition techniques to structure complex requests</li><li>Iterate prompts to improve output quality</li><li>Adapt prompting strategies based on task type (analysis, research, drafting, brainstorming)</li></ol>
+</div>
+<div class="row r2">
+  <div class="card key">
+    <h4>Mental model</h4>
+    <p>Treat Claude as "a brilliant but new employee who lacks context on your norms and workflows." Golden rule: if a colleague with minimal context would be confused by your prompt, Claude will be too. Weak output on the exam usually traces to a prompt a new colleague could not act on.</p>
+  </div>
+  <div class="card">
+    <h4>Prompt anatomy</h4>
+    <table>
+      <tbody>
+        <tr><td>Role</td><td>"You are an operations analyst."</td></tr>
+        <tr><td>Context</td><td>Who reads it, why it matters: "VP reads this on mobile before Monday."</td></tr>
+        <tr><td>Task</td><td>"List every action item with owner and due date."</td></tr>
+        <tr><td>Inputs</td><td>"Use only the attached notes."</td></tr>
+        <tr><td>Constraints</td><td>"Under 120 words. No jargon."</td></tr>
+        <tr><td>Format</td><td>"Table: Item, Owner, Due, Status."</td></tr>
+        <tr><td>Examples</td><td>One filled-in example row or paragraph</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Add how to collaborate: "If it isn't in the notes, write 'not stated'." "Push back if my assumptions are wrong." "Tell me what you're uncertain about."</p>
+  </div>
+</div>
+</div>
+<div class="cols">
+  <div class="card">
+    <h4>Four principles</h4>
+    <ul>
+      <li><b>Concrete limits beat adjectives.</b> "Under 100 words" works. "Be concise" barely moves output.</li>
+      <li><b>An example is the strongest format signal.</b> Show a filled template.</li>
+      <li><b>Explain why.</b> A reason generalizes better than "NEVER do X".</li>
+      <li><b>State the goal and the format.</b> "Three bullets" is a format. "Convince my team the timeline is realistic" is a goal.</li>
+    </ul>
+    <p class="small">Long prompts: separate parts with labels or XML-style tags (<code>&lt;context&gt;</code>, <code>&lt;notes&gt;</code>, <code>&lt;task&gt;</code>, <code>&lt;format&gt;</code>). Long documents: material first, question at the end.</p>
+  </div>
+  <div class="card">
+    <h4>Decomposition and prompt chaining</h4>
+    <table>
+      <tbody>
+        <tr><td>Sequential steps</td><td>"First A, then B, then C." Simple flows you trust.</td></tr>
+        <tr><td>Checkpoint</td><td>"Stop after step 2 and show me." Later steps depend on a result you must verify.</td></tr>
+        <tr><td>Prompt chain</td><td>Separate prompts, each using the checked output of the last. Multi-part deliverables.</td></tr>
+        <tr><td>Self-correction</td><td>Draft → review against stated criteria → revise.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Decompose when there are several deliverables, dependent steps, or a needed mid-point check. Each step should produce something you can check.</p>
+  </div>
+  <div class="card">
+    <h4>Iteration</h4>
+    <p>Give <b>specific</b> feedback. "Make it shorter" → "Cut the first two paragraphs and end with the ask."</p>
+    <ul>
+      <li><b>Follow up</b> in the same chat when the draft is mostly right.</li>
+      <li><b>Edit the original prompt</b> when the first prompt was the problem.</li>
+      <li><b>Start fresh</b> when the chat has gone off track.</li>
+    </ul>
+    <p class="small">Stuck? "Ask me the questions you need answered to write a better prompt." Instruction followed literally but uselessly? Restate the goal.</p>
+  </div>
+  <div class="card">
+    <h4>Strategy by task type</h4>
+    <table>
+      <thead><tr><th>Type</th><th>Include</th><th>Avoid</th></tr></thead>
+      <tbody>
+        <tr><td>Analysis</td><td>Data, criteria, reasoning before conclusions, ask for one recommendation</td><td>"What do you think?" with no criteria</td></tr>
+        <tr><td>Research</td><td>Research mode or web search, goals, sections, constraints, checkable sources</td><td>Trusting training knowledge for recent facts</td></tr>
+        <tr><td>Drafting</td><td>Audience, purpose, tone, length, format, an example</td><td>Generic "write a post about X"</td></tr>
+        <tr><td>Brain&shy;storming</td><td>Volume first (20 ideas), then narrow with criteria, turn by turn</td><td>"The best idea" in one shot</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card trap">
+    <h4>D1 traps</h4>
+    <ul>
+      <li>"Be detailed", "be concise", CAPITALS: intensifiers add no structure.</li>
+      <li>Regenerate until it works: the cause stays in place.</li>
+      <li>One giant prompt for a multi-part deliverable: decompose.</li>
+      <li>Paste every document "for context": attention is finite, so curate.</li>
+      <li>Bigger model to fix generic output: add context and constraints.</li>
+      <li>Format described in prose when it must match a template: show an example.</li>
+      <li>Repeat an ignored instruction louder: restate the goal.</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D2 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D2</span><h2>Output Evaluation and Validation</h2><span class="fourd">DISCERNMENT · DILIGENCE</span><span class="meta"><b>21%, the largest domain</b> · ~13 items · Lesson 03</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Evaluate Claude-generated outputs for accuracy and completeness</li><li>Identify hallucinations, inconsistencies, and biases in responses</li><li>Apply fact-checking and validation techniques</li><li>Determine when human review or additional verification is required</li><li>Edit, adapt, refine, and compare outputs for the intended audience</li><li>Organize and curate information and select appropriate output formats (artifacts, inline, structured data)</li></ol>
+</div>
+<div class="row r2">
+  <div class="card key">
+    <h4>Accuracy and completeness are separate checks</h4>
+    <p><b>Accuracy:</b> is every statement true per the source of record? <b>Completeness:</b> did the output include everything that matters? An output can be 100% accurate and still fail by omission. You catch omissions only by reading the source.</p>
+    <p class="small">"Fabrication concentrates in specificity: names, dates, statistics, citations, URLs, quotes." The more precise a claim, the more it needs checking.</p>
+  </div>
+  <div class="card">
+    <h4>Failure types</h4>
+    <table>
+      <tbody>
+        <tr><td>Hallucination</td><td>Specific-looking detail with no basis: cites "Section 8.2" of a rule with seven sections</td></tr>
+        <tr><td>Distortion</td><td>A real fact subtly changed: "up to $50,000" → "start at $50,000"</td></tr>
+        <tr><td>Omission</td><td>A material point left out: a legal-hold exemption disappears</td></tr>
+        <tr><td>Inconsistency</td><td>Contradictions inside one answer, or different answers across runs</td></tr>
+        <tr><td>Bias</td><td>One-sided framing, stereotyped defaults, unsupported group generalizations</td></tr>
+        <tr><td>Sycophancy</td><td>Agrees with a wrong premise or caves under pushback</td></tr>
+        <tr><td>Stale knowledge</td><td>Out-of-date training facts presented as current</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<div class="cols">
+  <div class="card trap">
+    <h4>Signals that are not evidence</h4>
+    <ul>
+      <li>Claude sounds confident, or rates its own confidence high (official Sample 1 rejects this).</li>
+      <li>Claude re-checks its own answer: the check is not independent.</li>
+      <li>Two runs agree: consistency ≠ accuracy. Two runs that <b>disagree</b> are a useful warning.</li>
+      <li>It cites a source: you still have to open it.</li>
+      <li>Polished, formatted, or in an artifact: people check polished output less often.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Fact-checking techniques</h4>
+    <table>
+      <tbody>
+        <tr><td>Quote first</td><td>"For each claim, quote the exact supporting sentence."</td></tr>
+        <tr><td>Cite location</td><td>"Give the section number for every requirement."</td></tr>
+        <tr><td>Permission not to know</td><td>"If the source doesn't say, write 'not in source'."</td></tr>
+        <tr><td>Restrict sources</td><td>"Use only the attached documents."</td></tr>
+        <tr><td>Label unsourced</td><td>"Mark general-knowledge claims 'unsourced'."</td></tr>
+        <tr><td>Compare runs</td><td>Same prompt in fresh chats. Disagreement flags weak claims.</td></tr>
+        <tr><td>Ground current facts</td><td>Web search or Research, then open the cited pages.</td></tr>
+        <tr><td>Compute exactly</td><td>Code execution for arithmetic. You still check inputs.</td></tr>
+        <tr><td>Source of record</td><td>A person reads the original. <b>This is the verification.</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Human-review triggers: scale scrutiny to stakes</h4>
+    <table>
+      <thead><tr><th>Output</th><th>Minimum check</th></tr></thead>
+      <tbody>
+        <tr><td>Brainstorm, draft for yourself</td><td>Skim for usefulness</td></tr>
+        <tr><td>Internal summary others act on</td><td>Verify names, numbers, dates, quotes</td></tr>
+        <tr><td>External (customers, press, regulators)</td><td>Verify specifics + accountable owner reviews before it goes out</td></tr>
+        <tr><td>High-risk domains*</td><td>Qualified professional reviews + disclose AI involvement</td></tr>
+        <tr><td>Decisions about people</td><td>Claude organizes information. A human owns the decision.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">*Usage Policy: legal, healthcare, insurance, finance and lending, employment and housing, academic testing, media. A reviewer counts only if qualified, sees the evidence, can stop the work, and reviews before the consequential step.</p>
+  </div>
+  <div class="card">
+    <h4>Adapt for the audience</h4>
+    <ul>
+      <li><b>Executive:</b> bottom line first, decision needed, two or three numbers.</li>
+      <li><b>Practitioner:</b> steps, owners, details, exceptions.</li>
+      <li><b>Customer or public:</b> plain language, no jargon, reviewed before sending.</li>
+    </ul>
+    <p class="small">Compare drafts against the goal and the reader. Length and polish are weak signals.</p>
+  </div>
+  <div class="card">
+    <h4>Output-format picker</h4>
+    <table>
+      <tbody>
+        <tr><td>Inline reply</td><td>Quick answer read once: "Which section covers access logs?"</td></tr>
+        <tr><td>Artifact</td><td>Standalone deliverable to edit, reuse, or share: brief, tracker, dashboard</td></tr>
+        <tr><td>File creation</td><td>Downloadable .docx, .xlsx, .pptx, or PDF</td></tr>
+        <tr><td>Structured data</td><td>Feeds another step or spreadsheet: table or CSV with fixed columns</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Ask for the deliverable. "Summarize Q3" gets a chat reply. "Turn Q3 into a one-page doc for leadership" gets an artifact.</p>
+  </div>
+  <div class="card trap">
+    <h4>D2 traps</h4>
+    <ul>
+      <li>Send it because it was confident or cited a section <span class="pat">blind trust</span></li>
+      <li>Ask Claude to rate or double-check itself <span class="pat">fake safeguard</span></li>
+      <li>Reformat, reword, or add a disclaimer <span class="pat">irrelevant fix</span></li>
+      <li>Verify one claim, assume the rest <span class="pat">blind trust</span></li>
+      <li>Fill a "data unavailable" gap with an estimate <span class="pat">blind trust</span></li>
+      <li>Throw out the whole output for one error <span class="pat">over-reaction</span></li>
+      <li>Legal review of an internal brainstorm <span class="pat">over-engineering</span></li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D3 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D3</span><h2>Product and Model Selection</h2><span class="fourd">DELEGATION</span><span class="meta"><b>12%</b> · ~7 items · Lesson 01</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Select appropriate Claude product features (Projects, research mode, chat, artifacts)</li><li>Differentiate between Claude model types (Haiku, Sonnet, Opus)</li><li>Align model selection with task requirements (cost, speed, quality)</li><li>Understand and manage context limitations and memory considerations (when to restart, summarize, or persist)</li></ol>
+</div>
+<div class="card">
+  <h4>Feature picker</h4>
+  <table>
+    <thead><tr><th style="width:30%">You need to…</th><th style="width:20%">Use</th><th>Signal words</th></tr></thead>
+    <tbody>
+      <tr><td>Think, draft, brainstorm turn by turn</td><td>Chat</td><td>"explore", "quick draft", "talk through"</td></tr>
+      <tr><td>Reuse the same files and instructions across chats</td><td>Project</td><td>"every week", "same format", "team", "ongoing"</td></tr>
+      <tr><td>Get one current fact fast</td><td>Web search</td><td>"today's", "latest price", "who won"</td></tr>
+      <tr><td>Produce a cited report from many sources</td><td>Research (web search on)</td><td>"comprehensive", "compare vendors", "market scan", "with sources"</td></tr>
+      <tr><td>Reason hard over material you have</td><td>Extended thinking / higher effort</td><td>"complex logic", "trade-offs", "multi-step analysis"</td></tr>
+      <tr><td>A standalone deliverable to edit, reuse, share</td><td>Artifact</td><td>"one-pager", "dashboard", "tracker", "share with the team"</td></tr>
+      <tr><td>A downloadable Word, Excel, PowerPoint, PDF</td><td>File creation</td><td>".docx", "spreadsheet", "slide deck to send" (needs code execution and file creation on)</td></tr>
+      <tr><td>Multi-step task ending in a finished file, in your folders, or on a schedule</td><td>Cowork (desktop, paid plans)</td><td>"every Monday", "in this folder", "finished file"</td></tr>
+      <tr><td>Write, test, ship software</td><td>Claude Code</td><td>"code", "repository", "deploy": developer territory, so the Associate escalates</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Research is for depth</b>; a quick fact needs web search. <b>Projects are for recurring context.</b> <b>Features combine:</b> a weekly competitor brief can use a Project + Research + an Artifact.</p>
+</div>
+</div>
+<div class="cols">
+  <div class="card">
+    <h4>Model picker: learn the tiers and their trade-offs</h4>
+    <table>
+      <thead><tr><th>Tier</th><th>Speed / cost</th><th>Best for</th><th>Exam cue</th></tr></thead>
+      <tbody>
+        <tr><td>Haiku</td><td>Fastest / lowest</td><td>Quick answers, simple extraction, high-volume routine drafts</td><td>"hundreds of", "simple", "fast"</td></tr>
+        <tr><td>Sonnet</td><td>Fast / moderate</td><td>Everyday writing, analysis, multi-step work. The default.</td><td>"typical", "most tasks"</td></tr>
+        <tr><td>Opus</td><td>Slower / highest</td><td>Deep reasoning, complex analysis, hard judgment calls</td><td>"complex", "nuanced"</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Sample 2 logic: faster, lower-cost model for straightforward high-volume work; the most capable model for complex reasoning. Start with Sonnet and move to Opus on evidence. Anthropic's lineup also includes <b>Fable</b>, a newer tier above Opus. The exam guide names three tiers, so answer with Haiku, Sonnet, Opus.</p>
+  </div>
+  <div class="card">
+    <h4>The effort lever</h4>
+    <table>
+      <tbody>
+        <tr><td>Model</td><td>Changes capability and cost</td></tr>
+        <tr><td>Effort / extended thinking</td><td>Changes how thoroughly Claude works before answering. Cost rises. Core capability stays the same.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Too little effort: missed instructions, unfinished work. Too much: verbose, scope creep, slow simple replies. Think in <b>cost per task</b>: one good turn can beat five cheap follow-ups. A bigger model does not fix a missing source, a vague prompt, or a policy problem.</p>
+  </div>
+  <div class="card">
+    <h4>Context window facts</h4>
+    <ul>
+      <li>Holds your messages, Claude's replies, and uploads. Standard: roughly 500 pages of text.</li>
+      <li><b>The whole conversation is re-sent every turn.</b> Long chats cost more and slow down.</li>
+      <li><b>Attention is finite.</b> Facts buried mid-material get missed. Key instructions go at start and end.</li>
+      <li><b>Long chats drift.</b> Early rules weaken.</li>
+      <li>Near the limit, claude.ai summarizes earlier messages. Summaries lose detail.</li>
+      <li><b>Context limit</b> = what fits in one chat. <b>Usage limit</b> = how much you can use over time.</li>
+    </ul>
+  </div>
+  <div class="card key">
+    <h4>Restart, summarize, or persist</h4>
+    <table>
+      <tbody>
+        <tr><td>Chat drifted, ignores early rules</td><td><b>Restart</b> with a short summary of decisions and rules</td></tr>
+        <tr><td>Same task, chat getting long</td><td><b>Summarize:</b> handoff summary, check it, carry into a new chat</td></tr>
+        <tr><td>New, unrelated task</td><td><b>Restart:</b> fresh chat, no old bias</td></tr>
+        <tr><td>Facts or rules needed across sessions</td><td><b>Persist:</b> Project instructions/knowledge, personal instructions, memory</td></tr>
+        <tr><td>Sensitive one-off, keep out of history</td><td><b>Incognito chat</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h4>Memory and Incognito</h4>
+    <ul>
+      <li>Claude does not learn from your corrections. A correction lasts only if persisted.</li>
+      <li><b>Memory</b> is on by default on Free, Pro, Max. Team/Enterprise owners control it. Each Project has its own memory. View, edit, delete in Settings.</li>
+      <li><b>Search and reference chats</b> (paid plans) looks up past conversations.</li>
+      <li><b>Incognito</b>: not saved to history, not searched later, still follows org retention. It does not make restricted data safe to upload.</li>
+      <li>Memory is a convenience. It does not replace Project knowledge as a source of truth.</li>
+    </ul>
+  </div>
+  <div class="card trap">
+    <h4>D3 traps</h4>
+    <ul>
+      <li>Most capable model for everything <span class="pat">over-engineering</span></li>
+      <li>Upgrade the model when facts or context are missing <span class="pat">irrelevant fix</span></li>
+      <li>Research mode for one quick fact <span class="pat">over-engineering</span></li>
+      <li>"Claude will remember last week": only via memory, a Project, or instructions</li>
+      <li>Repeat the format rule louder in a 60-turn chat: restart and persist</li>
+      <li>"Incognito means the data is approved" <span class="pat">fake safeguard</span></li>
+      <li>One long chat for everything: costs more, drifts</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D4 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D4</span><h2>Workflow Integration and Solution Design</h2><span class="fourd">DELEGATION</span><span class="meta"><b>16%</b> · ~10 items · Lesson 04</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Apply Claude to analyze requirements and use cases</li><li>Leverage Claude for research, planning, and process optimization</li><li>Use Claude to support solution design, development, and iteration</li><li>Integrate Claude into existing workflows to augment or redesign them</li><li>Communicate Claude's value and limitations to stakeholders</li></ol>
+</div>
+<div class="row r2">
+  <div class="card">
+    <h4>Requirements first</h4>
+    <table>
+      <tbody>
+        <tr><td>Deliverable</td><td>What exactly gets produced?</td></tr>
+        <tr><td>Audience</td><td>Who uses it, for what decision?</td></tr>
+        <tr><td>Sources</td><td>What data goes in, and is it approved?</td></tr>
+        <tr><td>Success</td><td>How will you know it works?</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Audit: how often, how long, how standardized, cost of imperfection? Have Claude interview you first.</p>
+  </div>
+  <div class="card">
+    <h4>Where Claude fits</h4>
+    <table>
+      <thead><tr><th>Strong fit</th><th>Weak fit</th></tr></thead>
+      <tbody class="notbold">
+        <tr><td>Drafting from approved inputs</td><td>Final authority on facts</td></tr>
+        <tr><td>Summarize, categorize, extract</td><td>Accountable decisions (hire, escalate an account)</td></tr>
+        <tr><td>Repurpose for formats and audiences</td><td>Emotionally sensitive conversations</td></tr>
+        <tr><td>Brainstorming, first-pass plans</td><td>Precise high-volume math a spreadsheet should own</td></tr>
+        <tr><td>Research synthesis with citations</td><td>Live data without search, Research, or a connector</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<div class="cols">
+  <div class="card key">
+    <h4>The delegation map: three buckets</h4>
+    <table>
+      <tbody>
+        <tr><td>Claude handles</td><td>Standardized, documented, repeatable, low cost of error. Spot-check.</td></tr>
+        <tr><td>Claude assists, human decides</td><td>Claude drafts. A person reviews before it counts.</td></tr>
+        <tr><td>Human handles</td><td>High stakes, sensitive situations, complex judgment</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Decide with <b>reversibility</b> (can you undo it?), <b>stakes</b> (money, reputation, legal, harm), <b>accountability</b> (who answers for it keeps the decision). Keep a human approval wherever an action is hard to reverse or external. Ask whether the step needs to exist before automating it.</p>
+  </div>
+  <div class="card">
+    <h4>Augment or redesign</h4>
+    <p><b>Augment</b> (start here): same workflow, faster steps. <b>Redesign:</b> steps merge, move, or disappear, once augmenting works, the process is the bottleneck, and Claude has proven reliable.</p>
+    <ol class="small" style="margin-top:2px">
+      <li>Pilot one workflow with a small group.</li>
+      <li>Validate on a known answer (redo a past task).</li>
+      <li>Measure against success criteria.</li>
+      <li>Release autonomy gradually.</li>
+      <li>Turn repeated explanations into Projects, instructions, Skills.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h4>Communicating value and limits</h4>
+    <table>
+      <tbody>
+        <tr><td>Bounded task</td><td>"Claude drafts the weekly ticket summary."</td></tr>
+        <tr><td>Benefit, labeled</td><td>"We estimate ~2 h/week. We'll measure it."</td></tr>
+        <tr><td>Limitation</td><td>"It can miscategorize. We spot-check 10."</td></tr>
+        <tr><td>Human owner</td><td>"Dana approves before sharing."</td></tr>
+        <tr><td>Constraint</td><td>"No new spend. Changes go through IT."</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Avoid "fully automated", "error-free", unmeasured savings. Usage numbers are diagnostics; outcomes prove value.</p>
+  </div>
+  <div class="card">
+    <h4>Know when to escalate</h4>
+    <table>
+      <tbody>
+        <tr><td>System integrations, pipelines at volume, API, custom connectors or agents</td><td>Claude Developer or Architect</td></tr>
+        <tr><td>Legal, medical, financial, employment judgments</td><td>Qualified human professional</td></tr>
+        <tr><td>Personal or regulated data, new data sources</td><td>Legal, privacy, data owner</td></tr>
+        <tr><td>New tools, integrations, policy exceptions</td><td>IT, security, policy owner</td></tr>
+      </tbody>
+    </table>
+      </div>
+  <div class="card trap">
+    <h4>D4 traps</h4>
+    <ul>
+      <li>"Claude can handle the whole process, start building" <span class="pat">blind trust</span></li>
+      <li>"No, it involves customer data" <span class="pat">over-reaction</span></li>
+      <li>Full autonomy on day one <span class="pat">blind trust</span></li>
+      <li>Roll out to every team at once <span class="pat">over-engineering</span></li>
+      <li>Automate a report nobody reads <span class="pat">irrelevant fix</span></li>
+      <li>Escalate a simple drafting workflow to an Architect <span class="pat">over-engineering</span></li>
+      <li>Adoption numbers as proof of value <span class="pat">fake safeguard</span></li>
+      <li>Promise "fully automated, no errors" <span class="pat">blind trust</span></li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D5 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D5</span><h2>Configuration and Knowledge Management</h2><span class="fourd">DESCRIPTION</span><span class="meta"><b>12%</b> · ~7 items · Lesson 05</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Configure Claude Projects with instructions and knowledge sources</li><li>Manage uploaded knowledge and connectors (e.g., Google Drive, Gmail)</li><li>Create effective system-level instructions</li><li>Inform, maintain, and update Claude configurations, knowledge sources, and instructions</li></ol>
+</div>
+
+  <div class="card key">
+    <h4>Where each piece of context belongs</h4>
+    <table>
+      <thead><tr><th>You want Claude to…</th><th>Put it in</th><th>Scope</th></tr></thead>
+      <tbody>
+        <tr><td>Follow house rules in every chat</td><td>Organization instructions (admin)</td><td>Whole org</td></tr>
+        <tr><td>Know you, your shorthand, preferences</td><td>Personal instructions</td><td>All your chats</td></tr>
+        <tr><td>Behave a set way for one workstream</td><td>Project instructions</td><td>Every chat in Project</td></tr>
+        <tr><td>Know reference material for one workstream</td><td>Project knowledge</td><td>Every chat in Project</td></tr>
+        <tr><td>Follow a repeatable procedure</td><td>Skill</td><td>Loads when request matches</td></tr>
+        <tr><td>Read live or changing files and email</td><td>Connector</td><td>What your account sees</td></tr>
+        <tr><td>Recall past conversations</td><td>Memory</td><td>Per Project or global</td></tr>
+        <tr><td>Handle today's one-off details</td><td>The chat prompt</td><td>That message</td></tr>
+      </tbody>
+    </table>
+    <p class="small"><b>Instructions</b> say how to behave. <b>Knowledge</b> says what to know. A <b>Skill</b> says how to do a repeatable task. "Projects store knowledge, skills perform tasks."</p>
+  </div>
+</div>
+<div class="cols">
+  <div class="card">
+    <h4>Project facts that show up in items</h4>
+    <ul>
+      <li>Setup: name and <b>description</b> · visibility · instructions · knowledge.</li>
+      <li><b>Claude does not see the description.</b> A rule typed there has no effect.</li>
+      <li><b>Context isolation:</b> a file uploaded in one chat stays in that chat. Add it to knowledge for every chat.</li>
+      <li><b>Retrieval mode:</b> near the context limit, Claude searches Project files and pulls relevant parts. Up to 10x capacity on paid plans, with an on-screen indicator.</li>
+      <li>Name files descriptively: "Travel-Policy-2026-10.pdf".</li>
+      <li>Team/Enterprise sharing: <i>Can view</i> (chat, use knowledge), <i>Can edit</i> (change instructions and knowledge, manage members), <i>Owner</i>.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Effective system-level instructions</h4>
+    <table>
+      <tbody>
+        <tr><td>Role and context</td><td>"You draft replies for Acme's Tier 1 support agents."</td></tr>
+        <tr><td>Source rule</td><td>"Use only the attached help articles. If the answer isn't there, say so."</td></tr>
+        <tr><td>Process</td><td>"Identify the question, find the article, then draft."</td></tr>
+        <tr><td>Format</td><td>"Under 150 words. End with one next step."</td></tr>
+        <tr><td>Conflict priority</td><td>"If brevity and completeness conflict, keep every required fact and cut background."</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Use short labeled sections. Keep it concise: every chat carries it.</p>
+  </div>
+  <div class="card">
+    <h4>Connectors (built on MCP)</h4>
+    <ul>
+      <li><b>Claude sees what you see:</b> your account's permissions.</li>
+      <li>Scoped at setup and revocable any time.</li>
+      <li>Gmail send/reply/forward and Drive share/move/trash ask for approval by default.</li>
+      <li><b>Google Drive works in private Projects only.</b></li>
+      <li>Team/Enterprise admins enable connectors first. Common pattern: read-only first, write access later with risk-owner sign-off.</li>
+      <li>Google Docs sync to the latest version. Uploaded files do not update.</li>
+    </ul>
+    <p class="small">Test: "Can you access my Google Drive? List three files in the Marketing folder."</p>
+  </div>
+  <div class="card">
+    <h4>Skills and memory</h4>
+    <p><b>Skills</b> are folders of instructions and resources that load when a request matches the Skill's description. They need code execution and file creation on. Create one by describing the task to Claude. Install custom Skills only from trusted sources.</p>
+    <p><b>Memory</b> helps continuity. It is not a source of truth. Keep authoritative facts in knowledge files.</p>
+  </div>
+  <div class="card">
+    <h4>Maintaining configurations</h4>
+    <ul>
+      <li><b>Replace</b> superseded documents. Old + new side by side gives mixed answers.</li>
+      <li>Keep 5–10 test questions with known answers. Rerun after every change.</li>
+      <li>Change one thing at a time.</li>
+      <li>Give each shared Project an owner and a review rhythm.</li>
+      <li>Turn repeated corrections into instructions.</li>
+    </ul>
+  </div>
+  <div class="card trap">
+    <h4>D5 traps</h4>
+    <ul>
+      <li>Put the rule in the Project description <span class="pat">irrelevant fix</span></li>
+      <li>Add the new policy alongside the old <span class="pat">fake safeguard</span></li>
+      <li>Tell users to remind Claude which version to use <span class="pat">irrelevant fix</span></li>
+      <li>Upload in your chat so the team can use it <span class="pat">irrelevant fix</span></li>
+      <li>Connect the whole Drive, tell Claude to ignore HR <span class="pat">fake safeguard</span></li>
+      <li>Store a procedure as a knowledge file <span class="pat">irrelevant fix</span></li>
+      <li>Rebuild the Project from scratch <span class="pat">over-reaction</span></li>
+      <li>Switch to the most capable model <span class="pat">over-engineering</span></li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D6 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D6</span><h2>Governance, Risk, and Responsible Use</h2><span class="fourd">DILIGENCE</span><span class="meta"><b>15%</b> · ~9 items · Lesson 06</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Identify appropriate and inappropriate use cases</li><li>Apply data sensitivity, regulatory, and privacy considerations</li><li>Follow organizational AI policies and governance standards</li><li>Understand the ethical implications of AI usage</li></ol>
+</div>
+<div class="answer-move"><b>Rule of thumb: make the task safe, then do it.</b> The exam penalizes going ahead unsafely, adding a fake safeguard, and abandoning the task. Sample 3: remove or anonymize customer names and account numbers first, then run the analysis.</div>
+<div class="row r2">
+  <div class="card">
+    <h4>Appropriate and inappropriate uses</h4>
+    <table>
+      <tbody>
+        <tr><td>Claude can handle</td><td>Standard replies from documented info, reformatting, summarizing your notes, brainstorming. Delegate, then spot-check.</td></tr>
+        <tr><td>Claude assists, human decides</td><td>Customer letters, survey analysis, a hiring rubric. A person reviews and owns it.</td></tr>
+        <tr><td>Human handles</td><td>Decisions about a person's job, pay, health, credit, or legal standing; sensitive conversations.</td></tr>
+      </tbody>
+    </table>
+    <p class="small"><b>High-risk (Usage Policy):</b> legal, healthcare, insurance, finance and lending, employment and housing, academic testing and admissions, media and journalism. Requires a qualified professional in the loop and disclosure of AI involvement. Consumer chatbots must tell users they are talking to AI.</p>
+  </div>
+  <div class="card key">
+    <h4>Data sensitivity: before you upload</h4>
+    <ol>
+      <li>What kind of data? Public, internal, confidential, regulated personal data.</li>
+      <li>What does org policy allow for this data class and tool?</li>
+      <li>What does the task need? Usually patterns. Rarely names.</li>
+    </ol>
+    <table style="margin-top:3px">
+      <tbody>
+        <tr><td>Remove</td><td>Drop unneeded columns (name, email)</td></tr>
+        <tr><td>Replace</td><td>AC-40021 → C001. Keep the key on your machine.</td></tr>
+        <tr><td>Generalize</td><td>2025-02-11 → 2025-02</td></tr>
+        <tr><td>Scrub free text</td><td>Comments hide names, order numbers, places</td></tr>
+        <tr><td>Rare combos</td><td>"Only Enterprise customer in LATAM" still identifies</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<div class="cols">
+  <div class="card trap">
+    <h4>Fake safeguards</h4>
+    <ul>
+      <li>"Upload it and tell Claude not to retain it." The data already left your hands.</li>
+      <li>"Use an Incognito chat." Org retention still applies, and the data was shared.</li>
+      <li>"It's internal" or "Legal asked for it." Purpose and seniority do not override policy.</li>
+      <li>"Add a disclaimer." Wrong or non-compliant content stays wrong.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Plan data handling (admins set it, you follow it)</h4>
+    <table>
+      <thead><tr><th>Plan</th><th>Training on chats</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Free, Pro, Max (consumer)</td><td>You choose in Privacy Settings</td><td>Allow: kept up to 5 years. Opt out: 30-day standard retention. Paying does not change the choice.</td></tr>
+        <tr><td>Team, Enterprise, Education, API (commercial)</td><td>Not used by default</td><td>Enterprise custom retention (30-day min). Admins control memory and connectors.</td></tr>
+        <tr><td>Incognito (all)</td><td>Same as plan</td><td>Not in history or memory. Org retention still applies.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Terms change. Verify on Anthropic's privacy pages.</p>
+  </div>
+  <div class="card">
+    <h4>Following org AI policy</h4>
+    <ul>
+      <li>Use the approved workspace for work data, even when a personal account looks faster.</li>
+      <li>Missing something? Ask the policy owner. Don't work around it.</li>
+      <li>Claude declines and explains why: treat it as information. Don't rephrase to slip past it.</li>
+      <li>See a policy-practice gap? Report it and help make the approved path easier.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Ethics</h4>
+    <ul>
+      <li><b>Bias:</b> coded job-ad language ("digital native"), one-sided framing. Ask Claude to review, then review yourself.</li>
+      <li><b>Fabrication:</b> never invent testimonials, reviews, quotes, or data.</li>
+      <li><b>Accountability:</b> whoever sends or files the work owns it.</li>
+      <li><b>Disclosure:</b> when it changes how people judge the work, when required, and always in high-risk cases. Diligence statement: what AI helped with · which tool · what you reviewed · what you changed · who is responsible.</li>
+      <li>Constitutional AI training reduces risk. It does not replace your judgment.</li>
+    </ul>
+  </div>
+  <div class="card trap">
+    <h4>D6 traps</h4>
+    <ul>
+      <li>Upload as-is, the analysis is internal <span class="pat">blind trust</span></li>
+      <li>Upload and tell Claude not to retain <span class="pat">fake safeguard</span></li>
+      <li>Skip the analysis / ban AI for the team <span class="pat">over-reaction</span></li>
+      <li>Let Claude make the hiring decision <span class="pat">blind trust</span></li>
+      <li>Anonymize, then let Claude decide <span class="pat">fake safeguard</span></li>
+      <li>Personal Pro account with training off <span class="pat">fake safeguard</span></li>
+      <li>Escalate every request to Legal <span class="pat">over-engineering</span></li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ============================ D7 ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">D7</span><h2>Troubleshooting and Optimization</h2><span class="fourd">DISCERNMENT</span><span class="meta"><b>10%</b> · ~6 items · Lesson 07</span></div>
+<div class="objectives"><span class="lbl">Objectives (verbatim)</span>
+  <ol><li>Identify, diagnose, and resolve issues with underperforming prompts or poor outputs</li><li>Adjust approach based on feedback and results</li><li>Optimize workflows for efficiency and effectiveness</li></ol>
+</div>
+<div class="row r-40">
+  <div class="card key">
+    <h4>Troubleshooting checklist: run in order</h4>
+    <ol class="rules">
+      <li><b>What changed?</b> Knowledge files, instructions, model or effort, connector, input file, person running it.</li>
+      <li><b>Context?</b> Source attached? Fact buried in a long chat? Drift? Context a teammate supplies that you don't?</li>
+      <li><b>Instructions?</b> Goal stated? Concrete limits? Conflicting rules?</li>
+      <li><b>Model and settings?</b> Light model on hard reasoning, or top model at max effort on routine work?</li>
+      <li><b>Source of facts?</b> Attached or connected source, or general knowledge?</li>
+    </ol>
+    <p class="small" style="margin-top:3px"><b>Change one thing at a time.</b> <b>Rerun the same 5–10 test inputs</b> with known-good outputs after each change.</p>
+    <h4 style="margin-top:5px">Adjust on feedback</h4>
+    <ul class="small">
+      <li>Turn "too long" into "cut the background, keep the three figures".</li>
+      <li>Steer early. A quick correction beats a full regenerate.</li>
+      <li>Restart when a chat has drifted far.</li>
+      <li>Weekly corrections → instructions. Repeated explanations → a Skill.</li>
+      <li>The model does not learn from you.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Failure → first fix</h4>
+    <table>
+      <thead><tr><th>Symptom</th><th>Likely cause</th><th>First fix</th></tr></thead>
+      <tbody>
+        <tr><td>Generic output</td><td>Missing context</td><td>Role, audience, purpose, source, example</td></tr>
+        <tr><td>Too long / short</td><td>Length guessed</td><td>State a number</td></tr>
+        <tr><td>Wrong format</td><td>Vague format</td><td>Show a filled example</td></tr>
+        <tr><td>Confident wrong facts</td><td>No source</td><td>Attach source, ask for quotes, verify</td></tr>
+        <tr><td>Wrong tone</td><td>Default voice</td><td>Describe tone, give a sample</td></tr>
+        <tr><td>Half the ask ignored</td><td>Too many asks</td><td>Decompose, check each step</td></tr>
+        <tr><td>Rules forgotten late</td><td>Context drift</td><td>Summarize, new chat, rules into Project</td></tr>
+        <tr><td>Essay, no decision</td><td>Never asked</td><td>Ask for one recommendation</td></tr>
+        <tr><td>Literal but useless</td><td>Letter of the rule</td><td>Restate the goal</td></tr>
+        <tr><td>Agrees with your error</td><td>Sycophancy</td><td>"Tell me where I'm wrong"</td></tr>
+        <tr><td>Math errors</td><td>LLMs and exact math</td><td>Code execution or spreadsheet; check inputs</td></tr>
+        <tr><td>Works for one colleague</td><td>Unstated context</td><td>Compare prompts, files, settings; share a Project</td></tr>
+        <tr><td>Different every run</td><td>Underspecified task</td><td>Tighten instructions and format; verify at source</td></tr>
+        <tr><td>Project worse after new files</td><td>Stale or conflicting knowledge</td><td>Remove superseded files, rerun tests</td></tr>
+        <tr><td>Missed steps, unfinished</td><td>Effort too low</td><td>Raise effort</td></tr>
+        <tr><td>Wordy, scope creep</td><td>Effort too high</td><td>Lower effort for routine work</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+<div class="row r2">
+  <div class="card">
+    <h4>Optimization levers: less time and cost, same quality</h4>
+    <table>
+      <tbody>
+        <tr><td>Model tier</td><td>Routine volume on a faster tier; hard reasoning on the top tier</td></tr>
+        <tr><td>Effort</td><td>Lower for routine, higher for complex analysis</td></tr>
+        <tr><td>Fresh chats</td><td>Each turn re-sends everything; new task, new chat</td></tr>
+        <tr><td>Projects</td><td>Stop re-pasting background</td></tr>
+        <tr><td>Templates, Skills</td><td>Save recurring prompts; a Skill loads only when needed</td></tr>
+        <tr><td>Fewer tools</td><td>Turn off unused connectors and features</td></tr>
+        <tr><td>Real bottleneck</td><td>Often a human handoff or approval</td></tr>
+        <tr><td>Question the step</td><td>Confirm someone uses the report first</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card trap">
+    <h4>D7 traps</h4>
+    <ul>
+      <li>Regenerate until it works <span class="pat">irrelevant fix</span></li>
+      <li>Switch to the most capable model <span class="pat">over-engineering</span></li>
+      <li>Rewrite the whole prompt from scratch <span class="pat">over-reaction</span></li>
+      <li>Repeat the instruction in capitals <span class="pat">irrelevant fix</span></li>
+      <li>Change model, instructions, and files together <span class="pat">over-engineering</span></li>
+      <li>Ask Claude to double-check itself and trust it <span class="pat">fake safeguard</span></li>
+      <li>Stop using Claude for this task <span class="pat">over-reaction</span></li>
+      <li>Top model at max effort for everything <span class="pat">over-engineering</span></li>
+    </ul>
+    <p class="small">Typical stem: "this used to work and now it doesn't". The best <b>first</b> step is to find what changed.</p>
+  </div>
+</div>
+</section>
+
+<!-- ============================ PRACTICAL SUMMARY ============================ -->
+<section>
+<div class="sec-h"><span class="code">LAB</span><h2>Practical summary: demos and use cases</h2><span class="meta">Files in <b>assets/demo-files/</b> · all fictional · run in claude.ai</span></div>
+<div class="card plain flow">
+  <h4>Demos</h4>
+  <table>
+    <thead><tr><th style="width:5%">Lesson</th><th style="width:25%">Demo · files</th><th>Key prompt idea · what to look for</th></tr></thead>
+    <tbody>
+      <tr><td>00</td><td>Walk the 3 official samples</td><td>Find the deciding phrase and name each wrong option's pattern. Then ask Claude for 3 new scenarios (1 proportionate answer, 3 distractors) and let it grade your labels.</td></tr>
+      <tr><td>01 A</td><td>Feature picker + two tiers<div class="fn">meeting-notes-raw.md</div></td><td>Pick a feature for 8 scenarios. Run "5 bullets + flag the one item a human must check" on Haiku and Sonnet. Judge substance: the CSV with customer emails, the auto-send request.</td></tr>
+      <tr><td>01 B</td><td>Drift → summarize → fresh chat<div class="fn">meeting-notes-raw.md</div></td><td>Set 2 rules, add a tangent, ask for a handoff summary under 150 words (goal, decisions, open questions, rules). Check it, start a new chat. Recurring rules go in Project instructions.</td></tr>
+      <tr><td>02</td><td>Raw notes → decomposed prompt<div class="fn">meeting-notes-raw.md</div></td><td>Weak baseline, then a tagged extraction prompt with an example row and "Unassigned" / "Not stated" rules. Checkpoint against the notes, specific feedback, email from the checked table, self-review.</td></tr>
+      <tr><td>03</td><td>Spot the errors, verify<div class="fn">fictional-regulation-excerpt.md, compliance-summary-draft.md</div></td><td>Claim-by-claim verdict + exact quote + section, regulation only (keep the answer key file claude-summary-with-errors.md out of the chat). Ctrl+F the quotes. Six issues: scope, 12 vs 24 months, two omissions, fake Section 8.2, "start at" vs "up to", unsupported generalization. Sycophancy probe, then an artifact and a table.</td></tr>
+      <tr><td>04</td><td>Map a workflow, brief a stakeholder<div class="fn">meeting-notes-raw.md</div></td><td>Claude interviews you (≤5 questions), then builds a delegation map. Legal check and email removal come before upload. Pressure-test auto-send. Note to Tom under 180 words: estimate, limit, approver.</td></tr>
+      <tr><td>05</td><td>Build the Northwind Project<div class="fn">project-knowledge-brand-voice.md</div></td><td>Instructions: source rule, [CHECK] placeholders, process, output line. Test happy path, guardrails, chat isolation. Update by replacing the file (12,000+ → 15,000+). A description rule does nothing.</td></tr>
+      <tr><td>06 A</td><td>Anonymize, then analyze churn<div class="fn">customer-accounts(-anonymized).csv</div></td><td>Plan redaction from the header + a made-up row. Anonymize in a spreadsheet, upload the clean file. Expect 6/16 churned: Basic 4/6, Pro 2/6, Enterprise 0/4. Count one yourself. Draft a diligence statement.</td></tr>
+      <tr><td>06 B</td><td>High-risk triage</td><td>Six cases. High-risk: discharge summary (healthcare), applicant shortlist (employment), rental decline (housing), news article (media). Confirm at the Usage Policy.</td></tr>
+      <tr><td>07 A</td><td>Diagnose a bad prompt<div class="fn">project-knowledge-brand-voice.md</div></td><td>"write a linkedin post about our courses" → retry changes nothing → 5-question checklist → rewrite with the source file, length, structure, banned words, and a facts-used list.</td></tr>
+      <tr><td>07 B</td><td>Stale file in the Project<div class="fn">brand-voice-2023-edition.md</div></td><td>Add the 2023 guide beside the current one and old prices or partner names leak in. Remove that one file, change nothing else, rerun.</td></tr>
+      <tr><td>08</td><td>Self-assessment</td><td>Score 30 objectives 0–3, compute priorities, have Claude draft a 4-week plan, recompute one priority yourself.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="card plain flow">
+  <h4>Use cases by role: suggested approach</h4>
+  <ul class="uc">
+    <li><b>D1 Teacher, 30 essays:</b> rubric + a model example; review each draft.</li>
+    <li><b>D1 Marketer, webinar titles:</b> 20 titles, then narrow by criteria.</li>
+    <li><b>D1 PM, 200 survey responses:</b> categorize, then count; spot-check counts.</li>
+    <li><b>D1 Consultant, market scan:</b> Research with goals, constraints, sources.</li>
+    <li><b>D2 Ops lead, contract clause 14.2:</b> open the clause yourself; legal reviews.</li>
+    <li><b>D2 Marketer, "73% of team leads":</b> publish only traceable stats.</li>
+    <li><b>D2 Consultant, subtotal mismatch:</b> code execution; check the inputs.</li>
+    <li><b>D2 PM, one update, 3 audiences:</b> exec, team, customer versions; account owner reviews the customer one.</li>
+    <li><b>D3 Marketer, 300 tag descriptions:</b> Haiku or low-effort Sonnet, one tested prompt, spot checks.</li>
+    <li><b>D3 Consultant, merger memo:</b> Opus or Sonnet + extended thinking.</li>
+    <li><b>D3 PM, competitor pricing:</b> Research; open the cited pages.</li>
+    <li><b>D3 Ops lead, 70-turn chat drifts:</b> handoff summary, fresh chat, template into Project instructions.</li>
+    <li><b>D4 Ops lead, onboarding emails:</b> augment: template in a Project, Claude drafts, a person sends, measure 4 weeks.</li>
+    <li><b>D4 Marketer, social calendar:</b> Claude drafts; a person approves; pilot one channel.</li>
+    <li><b>D4 Teacher, department feedback:</b> pilot one teacher, validate on graded reports; grades stay human.</li>
+    <li><b>D4 Consultant, client onboarding:</b> integrations to an Architect; an owner per step.</li>
+    <li><b>D5 HR, policy Q&amp;A:</b> Project with a dated handbook, quoted sections, 10 test questions, old versions replaced.</li>
+    <li><b>D5 CS lead, account hub:</b> private Project + scoped Drive connector (no Drive in shared Projects).</li>
+    <li><b>D5 Designer, quiz layout:</b> Skill = the how; knowledge = the what.</li>
+    <li><b>D5 Five writers, inconsistent drafts:</b> one shared Project, one guide, one owner.</li>
+    <li><b>D6 HR, 400 survey comments:</b> check policy, remove names and team IDs, scrub free text.</li>
+    <li><b>D6 Agency, no testimonials:</b> never invent them; ask real customers.</li>
+    <li><b>D6 Finance, duplicate payments:</b> code vendor names and bank numbers; confirm hits in the finance system.</li>
+    <li><b>D6 Instructor, 60 essays:</b> academic testing is high-risk; Claude drafts feedback, she grades and discloses.</li>
+    <li><b>D7 Comms, releases went stiff:</b> find the new rule, scope it, rerun 3 releases.</li>
+    <li><b>D7 Sales ops, limits by noon:</b> faster tier or lower effort for routine work.</li>
+    <li><b>D7 Teacher, uneven feedback:</b> rubric + annotated samples in a Project; compare to graded essays.</li>
+    <li><b>D7 Analyst, totals off:</b> code execution or a spreadsheet; check inputs.</li>
+  </ul>
+</div>
+</section>
+
+<!-- ============================ STRATEGY & PLAN ============================ -->
+<section>
+<div class="head"><div class="sec-h"><span class="code">DAY</span><h2>Exam strategy, logistics, and the 4-week plan</h2><span class="meta">Lesson 08</span></div>
+<div class="row r2">
+  <div class="card key">
+    <h4>Time budget: three passes</h4>
+    <table>
+      <tbody>
+        <tr><td>Pass 1 · 0–80 min</td><td>Answer every item in order. Past ~2 min: best answer, flag, move on. No blanks.</td></tr>
+        <tr><td>Pass 2 · 80–110</td><td>Flagged items. Reread for the constraint. Change only with a named reason.</td></tr>
+        <tr><td>Sweep · 110–120</td><td>No blanks. Each multiple-response item has exactly N picks.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">Checkpoints: item 15 ≈ 20 min · 30 ≈ 40 · 45 ≈ 60 · 60 ≈ 80.</p>
+  </div>
+  <div class="card">
+    <h4>Multiple-response tactic</h4>
+    <ul>
+      <li>Read the count first. Select exactly that many.</li>
+      <li>Judge each option alone: true, and does it answer this stem?</li>
+      <li><b>Treat every item as all-or-nothing.</b> No official source confirms partial credit.</li>
+      <li>Reject near-duplicates and options true in general that miss the scenario.</li>
+    </ul>
+    <p class="small">"About a quarter of items are multiple-response" is an unofficial community estimate.</p>
+  </div>
+</div></div>
+<div class="cols">
+  <div class="card">
+    <h4>How to read an item</h4>
+    <ol>
+      <li>Read the question line first ("best first step", "Choose TWO").</li>
+      <li>Find the constraint: privacy, stakes, cost/volume, recurrence, recency.</li>
+      <li>Predict the answer with the core logic, then eliminate by pattern.</li>
+      <li>Choose the proportionate step that keeps work moving safely.</li>
+    </ol>
+    <p class="small"><b>Tie-breakers:</b> the option a careful professional could defend to the risk owner · fix the cause over a per-chat workaround · distrust "always", "never", "guaranteed", "fully automatic".</p>
+  </div>
+  <div class="card">
+    <h4>Register, ID, reschedule, retake</h4>
+    <ul>
+      <li><b>Register:</b> Partner Academy (partner email) → pay → schedule with Pearson VUE. Get accommodations approved first (allow 10+ days).</li>
+      <li><b>ID:</b> government photo ID; name must match exactly. Fix it ≥24 h ahead via certifications-support@anthropic.com, subject "Name Correction Request".</li>
+      <li><b>Reschedule/cancel ≥48 h ahead.</b> Refunds need an email to support. No-show or late = fee lost.</li>
+      <li><b>Online:</b> system test, clear desk, no phone, watch, or second monitor, stay in webcam view. Accept the NDA.</li>
+      <li><b>Retakes:</b> 14 / 30 / 90 days; max 4 per rolling 12 months; fee each time. <b>Renewal:</b> free and on time; lapsed = full exam.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h4>Four-week study plan (~20 h)</h4>
+    <table>
+      <thead><tr><th>Wk</th><th>Focus</th><th>Do</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Blueprint, D3, D1</td><td>Exam Guide + samples, baseline rubric. Prep courses 1–2, Lessons 00–02. Practice Q1–7, Q19–24.</td></tr>
+        <tr><td>2</td><td>D2, D4</td><td>Courses 3–4, Lessons 03–04, their demos. Q8–18, Q25–32.</td></tr>
+        <tr><td>3</td><td>D5, D6, D7</td><td>Courses 5–8, Lessons 05–08, their demos. Q33–50. Re-score the rubric.</td></tr>
+        <tr><td>4</td><td>All</td><td>All 50 questions in 100 min. Two weakest domains. Logistics (appointment &gt;48 h out, ID, system test). Traps tables, then rest.</td></tr>
+      </tbody>
+    </table>
+    <p class="small">45–60 min weekdays + 90 min one weekend day. Prep path: 8 courses, ~6.5 h. Label each miss: <b>Knowledge</b> (reread) · <b>Reading</b> (slow down) · <b>Judgment</b> (drill patterns).</p>
+  </div>
+  <div class="card key">
+    <h4>Self-assessment formula</h4>
+    <p>Score each of the 30 objectives: <b>0</b> can't explain · <b>1</b> can explain · <b>2</b> done it with guidance · <b>3</b> do it routinely and can say why wrong answers fail.</p>
+    <p style="text-align:center; font-size:10pt; margin:3px 0"><b>Priority = (3 − domain average) × domain weight</b></p>
+    <p class="small">D2 at 1.5 → 1.5 × 21 = 31.5. D7 at 1.0 → 2 × 10 = 20. D2 comes first. <b>Ready to book:</b> ≥2 on every objective, 3 on most of D2, a steady practice score a week apart. Practice bands (uncalibrated): 45–50 strong · 38–44 close · 30–37 keep studying · &lt;30 restart.</p>
+  </div>
+</div>
+
+<div class="card plain" style="margin-top:2px">
+  <h4>Official links</h4>
+  <ul class="links">
+    <li><a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542847%2FClaude+Certified+Associate+%E2%80%93+Foundations+Exam+Guide.pdf"><b>Exam Guide v1.0 (PDF)</b></a> <span>everpath-course-content.s3-accelerate.amazonaws.com/…/Foundations+Exam+Guide.pdf</span></li>
+    <li><a href="https://anthropic-partners.skilljar.com/page/partner-certifications"><b>Certifications overview</b></a> <span>anthropic-partners.skilljar.com/page/partner-certifications</span></li>
+    <li><a href="https://anthropic-partners.skilljar.com/page/faq-certifications"><b>Certifications FAQ</b></a> <span>anthropic-partners.skilljar.com/page/faq-certifications</span></li>
+    <li><a href="https://anthropic-partners.skilljar.com/page/policies-certifications"><b>Certification policies</b></a> <span>anthropic-partners.skilljar.com/page/policies-certifications</span></li>
+    <li><a href="https://anthropic-partners.skilljar.com/path/claude-certified-associate-foundations"><b>Official prep path (8 courses)</b></a> <span>anthropic-partners.skilljar.com/path/claude-certified-associate-foundations</span></li>
+    <li><a href="https://www.pearsonvue.com/us/en/anthropic.html"><b>Pearson VUE for Anthropic</b></a> <span>pearsonvue.com/us/en/anthropic.html</span></li>
+    <li><a href="https://academy.claude.com/courses/ai-fluency-framework-foundations"><b>AI Fluency: Framework and Foundations</b></a> <span>academy.claude.com/courses/ai-fluency-framework-foundations</span></li>
+    <li><a href="https://academy.claude.com/courses/claude-101"><b>Claude 101</b></a> <span>academy.claude.com/courses/claude-101</span></li>
+    <li><a href="https://www.anthropic.com/legal/aup"><b>Usage Policy (high-risk use cases)</b></a> <span>anthropic.com/legal/aup</span></li>
+    <li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices"><b>Prompting best practices</b></a> <span>platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices</span></li>
+    <li><a href="https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"><b>Reduce hallucinations</b></a> <span>platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations</span></li>
+    <li><a href="https://support.claude.com/en/articles/9517075-what-are-projects"><b>What are Projects?</b></a> <span>support.claude.com/en/articles/9517075</span></li>
+    <li><a href="https://support.claude.com/en/articles/10166901-use-google-workspace-connectors"><b>Google Workspace connectors</b></a> <span>support.claude.com/en/articles/10166901</span></li>
+    <li><a href="https://support.claude.com/en/articles/11817273"><b>Memory and Incognito</b></a> <span>support.claude.com/en/articles/11817273</span></li>
+    <li><a href="https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work"><b>Usage and length limits</b></a> <span>support.claude.com/en/articles/11647753</span></li>
+    <li><a href="https://www.anthropic.com/news/updates-to-our-consumer-terms"><b>Consumer terms update (training choice)</b></a> <span>anthropic.com/news/updates-to-our-consumer-terms</span></li>
+    <li><b>Support:</b> <span>certifications-support@anthropic.com (name corrections, refunds) · partner-support@anthropic.com (email domain, discounts)</span></li>
+  </ul>
+  <p class="foot-note">Practice questions in this course are original and do not come from the live exam. Exam content is under NDA. Verify policies at the official pages before booking, because terms change.</p>
+</div>
+</section>
+
+</body>
+</html>
