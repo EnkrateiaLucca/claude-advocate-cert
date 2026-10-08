@@ -10,6 +10,7 @@ Course materials for the O'Reilly live training *Claude Certified Associate Exam
 | `lessons/` | One markdown lesson per exam domain, each with demos and use cases to work through in claude.ai |
 | `lessons/practice-questions.md` | Original exam-style practice questions, weighted by domain, with answers |
 | `cheatsheet/ccao-f-cheatsheet.pdf` | Printable cheatsheet of the whole course (≤10 pages) |
+| `study-guide/ccao-f-study-guide.pdf` | Visual study guide: 31 quiz questions with answers, worked examples and reference tables by domain (`uv run study-guide/build.py` regenerates the HTML) |
 | `assets/demo-files/` | Fictional files used in the demos (upload them to Claude) |
 | `research/` | Sourced research notes behind the materials |
 
